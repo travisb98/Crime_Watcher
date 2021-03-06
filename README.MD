@@ -101,10 +101,32 @@ grid up the city
 we should write up code that downloads and updates the police incidents spread sheet
 
 
+day 3
+---
+activities to look at
+    - voices
+    - lsd
 
+# steps
+    - ETL 
+        - look into API or CSV options, make it download
+        - ETL should download data for current and prior year, clean then combine data
+        - delete uneeded csvs
+    - 
+    - 
+    - 
+    - Front End
+        - map that shows current location and recent crimes in vicinity
+        - guage that shows danger level for your location
+        - possible danger shading around border of map
 
+# joes step list
 
-
-
+1. Download all data using API or csv's
+2. Clean and filter data and delete csv's if they exist storing data in ram 
+3. run clustering model to determine which cluster each point is in or optionally train a new clustering model
+4. Run Aggregation algorithm creating new data set and deleting old
+5. train model using up to date data
+6. predict current time period and return value
 
 
