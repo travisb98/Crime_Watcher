@@ -51,7 +51,6 @@ similar project:
 https://towardsdatascience.com/demand-forecast-boston-crime-data-64a0cff54820
 
 
-
 How safe are you in minneapolis based on location
 
 machine learn to classify how safe we are
@@ -107,11 +106,14 @@ activities to look at
     - voices
     - lsd
 
+
+
 # steps
     - ETL 
         - look into API or CSV options, make it download
         - ETL should download data for current and prior year, clean then combine data
-        - delete uneeded csvs
+        - delete uneeded csv
+        - "enter number of days you want to use to predict"
     - 
     - 
     - 
