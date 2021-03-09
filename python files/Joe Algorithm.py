@@ -1,4 +1,3 @@
-# this py file will call the api for the current and previous year, clean the data, and save all features for both years into a json file
 import pandas as pd
 import requests
 import json
@@ -8,7 +7,7 @@ import math
 import numpy as np
 from sklearn.cluster import KMeans
 
-# defind the current and previous year
+# define the current and previous year
 current_year = datetime.datetime.now().year
 last_year = current_year - 1
 
@@ -98,23 +97,37 @@ crime_severity={
 "DO NOT USE": 0
 }
 
-#This assigns a danger value to each cluster
-Cluster_Danger=[0 for x in range(Clusters)]
-for crime in crime_list:
-    try:
-        Cluster_Danger[clusterer.predict([[crime["centerLong"],crime["centerLat"]]])[0]]+=crime_severity[crime["description"]]
-    except KeyError:
-        print("An error occured on the keys")
-        print(crime["description"])
-        print("")
-print(Cluster_Danger)
+#Set parameters for machine learning algorithm
+PriorDays=120
+# today=datetime.date.today()
+today=datetime.date(2021,1,1)
+InitDay=today-datetime.timedelta(days=PriorDays)
 
-#This creates a normalized danger value for each cluster between 0 and 10
-Normal_Cluster_Danger=[]
-MaxDanger=max(Cluster_Danger)
-for cluster in Cluster_Danger:
-    Normal_Cluster_Danger.append(math.ceil(cluster/MaxDanger*10))
-print("")
-print("")
-print(Normal_Cluster_Danger)
+counter=0
+day=InitDay
+while day < today:
+    counter+=1
+    day+=datetime.timedelta(days=1)
+print(counter)
+
+#This assigns a danger value to each cluster
+Cluster_Danger=[[0 for x in range(Clusters)] for y in range(PriorDays)]
+
+# for crime in crime_list:
+#     try:
+#         Cluster_Danger[clusterer.predict([[crime["centerLong"],crime["centerLat"]]])[0]]+=crime_severity[crime["description"]]
+#     except KeyError:
+#         print("An error occured on the keys")
+#         print(crime["description"])
+#         print("")
+# print(Cluster_Danger)
+
+# #This creates a normalized danger value for each cluster between 0 and 10
+# Normal_Cluster_Danger=[]
+# MaxDanger=max(Cluster_Danger)
+# for cluster in Cluster_Danger:
+#     Normal_Cluster_Danger.append(math.ceil(cluster/MaxDanger*10))
+# print("")
+# print("")
+# print(Normal_Cluster_Danger)
 
