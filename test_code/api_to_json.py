@@ -4,6 +4,9 @@ import pandas as pd
 import requests
 import json
 import datetime
+import pickle
+
+from sklearn.cluster import KMeans
 
 ### defind the current and previous year
 current_year = datetime.datetime.now().year
@@ -20,7 +23,7 @@ def callAndStore(year):
 
     return features
 
-feature_list=[]
+crime_list=[]
 
 ##### for all features in the current and prior year.....
 for feature in (callAndStore(current_year)+callAndStore(last_year)):
@@ -31,9 +34,24 @@ for feature in (callAndStore(current_year)+callAndStore(last_year)):
         'centerLat':feature['attributes']['centerLat'],
         'description':feature['attributes']['description'].strip()
         }
-    feature_list.append(clean_feature)
+    crime_list.append(clean_feature)
+
+
+incidents = pd.DataFrame(crime_list)
+
+# Initialize and Fit KMeans Model
+clusterer = KMeans(n_clusters=500,random_state=42).fit(incidents[["centerLong","centerLat"]])
+
+# Run Predictions
+predictions = clusterer.predict(incidents[["centerLong","centerLat"]])
+
+# Add column for clusters to incidents dataframe
+incidents["cluster"] = predictions
+
+# Save Model using Pickle
+pickle.dump(clusterer, open("../models/clusterer.pkl", "wb"))
 
 ### write response to json file
 with open(f'../resources/Police_Incidents_{last_year}_to_{current_year}.json','w+') as json_file:
-    json.dump(feature_list,json_file)
+    json.dump(crime_list,json_file)
 
