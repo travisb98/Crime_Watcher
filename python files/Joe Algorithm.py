@@ -3,6 +3,9 @@ import pandas as pd
 import requests
 import json
 import datetime
+import pickle
+import numpy as np
+from sklearn.cluster import KMeans
 
 # defind the current and previous year
 current_year = datetime.datetime.now().year
@@ -30,6 +33,21 @@ for crime in (callAndStore(current_year)+callAndStore(last_year)):
         'description':crime['attributes']['description'].strip()
         }
     crime_list.append(clean_crime)
+
+incidents = pd.DataFrame(crime_list)
+
+Clusters=500
+# Initialize and Fit KMeans Model
+clusterer = KMeans(n_clusters=Clusters,random_state=42).fit(incidents[["centerLong","centerLat"]])
+
+# Run Predictions
+predictions = clusterer.predict(incidents[["centerLong","centerLat"]])
+
+# Add column for clusters to incidents dataframe
+incidents["cluster"] = predictions
+
+# Save Model using Pickle
+# pickle.dump(clusterer, open("../models/clusterer.pkl", "wb"))
 
 crime_severity={
     "AUTOMOBILE THEFT": 4,
@@ -66,7 +84,6 @@ crime_severity={
     "FAIL TO PAY - TAXI/HOTEL/REST": 2.5
     }
 
-Sections=500
 a=0
 for crime in crime_list:
     try:
@@ -74,6 +91,7 @@ for crime in crime_list:
     except KeyError:
         # print("An error occured on the keys")
         print(crime["description"])
+        print(clusterer.predict([[crime["centerLong"],crime["centerLat"]]]))
 print(a)
 
 

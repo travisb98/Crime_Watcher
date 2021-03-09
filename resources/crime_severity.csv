@@ -1,33 +1,33 @@
-Crime,severity
-AUTOMOBILE THEFT,4
-THEFT-MOTR VEH PARTS,2.5
-OTHER THEFT,2.5
-THEFT FROM MOTR VEHC,2
-BURGLARY OF DWELLING,5
-BURGLARY OF BUSINESS,4
-ROBBERY PER AGG,8
-ASSLT W/DNGRS WEAPON,6
-ROBBERY INCLUDING AUTO THEFT,4
-ROBBERY OF PERSON,4
-BIKE THEFT,2
-CSC - RAPE,9
-SHOPLIFTING,4
-2ND DEG DOMES ASLT,4
-THEFT BY SWINDLE,3
-DOMESTIC ASSAULT/STRANGULATION,4
-ROBBERY OF BUSINESS,4
-ASLT-SGNFCNT BDLY HM,4
-ASLT4-LESS THAN SUBST HARM,4
-THEFT FROM PERSON SNATCH/GRAB,4
-ARSON,8
-MURDER (GENERAL),11
-CSC - SODOMY,9
-THEFT FROM BUILDING,4
-3RD DEG DOMES ASLT,6
-CSC - PENETRATE WITH OBJECT,9
-ASLT-GREAT BODILY HM,9
-OTHER VEHICLE THEFT,4
-ASLT4-SUBST HARM OR WEAPON,6
-OBS - PETTY THEFT,2
-ON-LINE THEFT,2.5
-FAIL TO PAY - TAXI/HOTEL/REST,2.5
+Crime,severity,,,,,
+AUTOMOBILE THEFT,4,,"""AUTOMOBILE THEFT"": 4,",,,"=""""""""&A2&"""""": "" & B2 &"","""
+THEFT-MOTR VEH PARTS,2.5,,"""THEFT-MOTR VEH PARTS"": 2.5,",,,"=""""""""&A3&"""""": "" & B3 &"","""
+OTHER THEFT,2.5,,"""OTHER THEFT"": 2.5,",,,"=""""""""&A4&"""""": "" & B4 &"","""
+THEFT FROM MOTR VEHC,2,,"""THEFT FROM MOTR VEHC"": 2,",,,"=""""""""&A5&"""""": "" & B5 &"","""
+BURGLARY OF DWELLING,5,,"""BURGLARY OF DWELLING"": 5,",,,"=""""""""&A6&"""""": "" & B6 &"","""
+BURGLARY OF BUSINESS,4,,"""BURGLARY OF BUSINESS"": 4,",,,"=""""""""&A7&"""""": "" & B7 &"","""
+ROBBERY PER AGG,8,,"""ROBBERY PER AGG"": 8,",,,"=""""""""&A8&"""""": "" & B8 &"","""
+ASSLT W/DNGRS WEAPON,6,,"""ASSLT W/DNGRS WEAPON"": 6,",,,"=""""""""&A9&"""""": "" & B9 &"","""
+ROBBERY INCLUDING AUTO THEFT,4,,"""ROBBERY INCLUDING AUTO THEFT"": 4,",,,"=""""""""&A10&"""""": "" & B10 &"","""
+ROBBERY OF PERSON,4,,"""ROBBERY OF PERSON"": 4,",,,"=""""""""&A11&"""""": "" & B11 &"","""
+BIKE THEFT,2,,"""BIKE THEFT"": 2,",,,"=""""""""&A12&"""""": "" & B12 &"","""
+CSC - RAPE,9,,"""CSC - RAPE"": 9,",,,"=""""""""&A13&"""""": "" & B13 &"","""
+SHOPLIFTING,4,,"""SHOPLIFTING"": 4,",,,"=""""""""&A14&"""""": "" & B14 &"","""
+2ND DEG DOMES ASLT,4,,"""2ND DEG DOMES ASLT"": 4,",,,"=""""""""&A15&"""""": "" & B15 &"","""
+THEFT BY SWINDLE,3,,"""THEFT BY SWINDLE"": 3,",,,"=""""""""&A16&"""""": "" & B16 &"","""
+DOMESTIC ASSAULT/STRANGULATION,4,,"""DOMESTIC ASSAULT/STRANGULATION"": 4,",,,"=""""""""&A17&"""""": "" & B17 &"","""
+ROBBERY OF BUSINESS,4,,"""ROBBERY OF BUSINESS"": 4,",,,"=""""""""&A18&"""""": "" & B18 &"","""
+ASLT-SGNFCNT BDLY HM,4,,"""ASLT-SGNFCNT BDLY HM"": 4,",,,"=""""""""&A19&"""""": "" & B19 &"","""
+ASLT4-LESS THAN SUBST HARM,4,,"""ASLT4-LESS THAN SUBST HARM"": 4,",,,"=""""""""&A20&"""""": "" & B20 &"","""
+THEFT FROM PERSON SNATCH/GRAB,4,,"""THEFT FROM PERSON SNATCH/GRAB"": 4,",,,"=""""""""&A21&"""""": "" & B21 &"","""
+ARSON,8,,"""ARSON"": 8,",,,"=""""""""&A22&"""""": "" & B22 &"","""
+MURDER (GENERAL),11,,"""MURDER (GENERAL)"": 11,",,,"=""""""""&A23&"""""": "" & B23 &"","""
+CSC - SODOMY,9,,"""CSC - SODOMY"": 9,",,,"=""""""""&A24&"""""": "" & B24 &"","""
+THEFT FROM BUILDING,4,,"""THEFT FROM BUILDING"": 4,",,,"=""""""""&A25&"""""": "" & B25 &"","""
+3RD DEG DOMES ASLT,6,,"""3RD DEG DOMES ASLT"": 6,",,,"=""""""""&A26&"""""": "" & B26 &"","""
+CSC - PENETRATE WITH OBJECT,9,,"""CSC - PENETRATE WITH OBJECT"": 9,",,,"=""""""""&A27&"""""": "" & B27 &"","""
+ASLT-GREAT BODILY HM,9,,"""ASLT-GREAT BODILY HM"": 9,",,,"=""""""""&A28&"""""": "" & B28 &"","""
+OTHER VEHICLE THEFT,4,,"""OTHER VEHICLE THEFT"": 4,",,,"=""""""""&A29&"""""": "" & B29 &"","""
+ASLT4-SUBST HARM OR WEAPON,6,,"""ASLT4-SUBST HARM OR WEAPON"": 6,",,,"=""""""""&A30&"""""": "" & B30 &"","""
+OBS - PETTY THEFT,2,,"""OBS - PETTY THEFT"": 2,",,,"=""""""""&A31&"""""": "" & B31 &"","""
+ON-LINE THEFT,2.5,,"""ON-LINE THEFT"": 2.5,",,,"=""""""""&A32&"""""": "" & B32 &"","""
+FAIL TO PAY - TAXI/HOTEL/REST,2.5,,"""FAIL TO PAY - TAXI/HOTEL/REST"": 2.5",,,"=""""""""&A33&"""""": "" & B33"
