@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- page name from flask  -->
+  <title>{{ page_name }}</title>
+  <!-- boot strap  -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- d3  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <!-- page name from flask  -->
+      <h1>{{ page_name }}</h1>
+    </div>
+    <!-- main and possibly the only button we'll need -->
+    <button id ='button' type="button" class="btn btn-primary">{{ button_name }}</button>
+    <!-- just an example of how we can send data from flask -->
+    <h1>{{ text }}</h1>
+    <!-- just an example of how we can send data from flask -->
+    <div>
+      <ul>
+        {% for name in list %}
+        <li>{{name}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+  
+ <!-- main javascript file -->
+  <script src="./static/js/main.js" type = "text/javascript"></script>
+
+
+</body>
+
+</html>
