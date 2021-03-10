@@ -1,6 +1,6 @@
 ######## this code is currently being ran from the "app" folder
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect
 import socket
 import geocoder
 import requests
@@ -27,6 +27,28 @@ def home():
     return render_template('index.html',list=test_list,text=message,button_name=button_name,page_name=page_name)
 
 
+### this route will pull the coordinates from the javascript
+@app.route('/coor',methods =['POST','GET'])
+def coor():
+    r = request.form
+
+    coordinates = {'userlat':r['userlat'],'userlon':r['userlon']}
+    # r = request.stream
+    print("---------------------")
+    print("---------------------")
+    print("---------------------")
+    print('This variable was sent to flask from the javasacript file:')
+    print(coordinates)
+    print('the variable type is')
+    print(type(coordinates))
+    print("---------------------")
+    print("---------------------")
+    print("---------------------")
+
+    return redirect('/')
+
+
+
 
 # # This route could be used for running the machine learning prediction
 # @app.route("/load")
@@ -49,6 +71,8 @@ def home():
 if __name__ == "__main__":
     app.run(debug=True)
     
+
+
 
 
 ####### everything below this obnoxious block is test code
