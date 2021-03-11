@@ -10,5 +10,6 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   tileSize: 60,
   maxZoom: 18,
   zoomOffset: -1,
-  id: api_key,
+  id: "mapbox/streets-v11",
+  accessToken: api_key
 }).addTo(myMap);
