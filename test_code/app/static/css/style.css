@@ -1,8 +1,5 @@
 body {
     background-color: lightgray;
-    padding: 0;
-    margin: 0;
-      
 }
 
 .center {
@@ -10,14 +7,4 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-  }
-
-  
-
-#maprow,
-#map,
-body,
-html {
-    height: 90%;
-    width: 90%;
   }

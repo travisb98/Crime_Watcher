@@ -1,6 +1,6 @@
 ######## this code is currently being ran from the "app" folder
 
-from flask import Flask, render_template, jsonify, request, redirect
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 import socket
 import geocoder
 import requests
@@ -15,79 +15,88 @@ app = Flask(__name__)
 #  homepage
 @app.route("/")
 def home():
-    #### this route will serve up the home page,
-
     print("Server received request for 'Home' page...")
 
     #### not even sure if we should be all passing these variables from flask, maybe html or javascript is better idk
     fake_list=['this','is','a','list','from','flask']
     message = f'string served up by flask'
-    button_name = 'Button name from flask'
-    page_name = 'Minneapolis Crime Watcher'
+    button_name = 'Load'
+
+    return render_template('index.html',list=fake_list,text=message,button_name=button_name)
+
+# @app.route('/results',methods =['POST','GET'])
+# @app.route('/results<coordinates>')
+# @app.route('/results<coordinates>',methods =['POST','GET'])
+# def results(coordinates):
 
 
-    return render_template('index.html',list=fake_list,text=message,button_name=button_name,page_name=page_name)
+# @app.route('/results')
+# def results():
+#     print('---------------------')
+#     print('Server received request for results page')
+#     # print(coordinates)
 
+
+#     fake_list=['crime1','crime2','crime3','crime4','crime5','crime6']
+#     # result_message = f'your fake danger score is 12/10 at coordinates {coordinates}'
+#     result_message = f'your fake danger score is 12/10 at coordinates'
+#     button_name = 'Reload'
+
+
+#     return render_template('results.html',list=fake_list,text=result_message,button_name=button_name)
 
 ### this route will pull the coordinates from the javascript
+# @app.route('/coor',methods =['POST'])
 @app.route('/coor',methods =['POST','GET'])
 def coor():
-    print('------------------------')
     print('------------------------')
     print('------------------------')
     print('coor route was reached')
     print('------------------------')
     print('------------------------')
-    print('------------------------')
+
+    # if request.method =='POST':
+    #     rf = request.form
+    #     # coordinates = {'userlat':rf['userlat'],'userlon':rf['userlon']}
+    #     # result_message = f'your fake danger score is 12/10 at coordinates {coordinates}'
+    #     fake_list=['crime1','crime2','crime3','crime4','crime5','crime6']
+    #     button_name = 'Reload'
+
+    #     return render_template('results.html',list=fake_list,text=rf,button_name=button_name)
+
+
+
 
 
     #### grab the request's form option to get the variables we passed from javascript
     r = request.form
-
-
-  
     coordinates = {'userlat':r['userlat'],'userlon':r['userlon']}
-    print("---------------------")
-    print("---------------------")
+
     print("---------------------")
     print('This variable was sent to flask from the javasacript file:')
     print(coordinates)
     print('the variable type is')
     print(type(coordinates))
     print("---------------------")
-    print("---------------------")
-    print("---------------------")
 
+
+
+    # fake_list=['crime1','crime2','crime3','crime4','crime5','crime6']
+    # result_message = f'your fake danger score is 12/10 at coordinates {coordinates}'
+    # button_name = 'Reload'
+    # return render_template('results.html',list=fake_list,text=result_message,button_name=button_name)
+    
 
     ####psudeo code
     ######## hit api to get list of recent crimes in the area (x number of miles from coordinates)
-
-
-
-
-
-
-
-
-    #### I think i might actually want to make a 'results.html' page to direct to here 
+    
     return redirect('/')
+    # return redirect(url_for('results'), code=307)
+    # return redirect(url_for('results',coordinates = coordinates))
 
 
 
 
-# # This route could be used for running the machine learning prediction
-#### also, instead of making this a seperate route it might make more sense to put this in the route above that pulls the coordinates "/coor"
-# @app.route("/load")
-# def load():
-    #psuedo code:
-    ### hit  https://opendata.minneapolismn.gov/ api and use the date filter to return recent crimes in the area
-
-
-    #run a function from an imported py file that makes prediction based on the users's location. This function should return recent crime in the area
-
-
-
-#     return redirect('/')
 
 
 
