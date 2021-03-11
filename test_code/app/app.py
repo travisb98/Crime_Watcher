@@ -1,12 +1,13 @@
 ######## this code is currently being ran from the "app" folder
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect
 import socket
 import geocoder
 import requests
 import json
-#### might need this????
-# import requests
+
+### this module is being finalized and will return api calls
+# import crime_api
 
 #create app
 app = Flask(__name__)
@@ -18,23 +19,74 @@ def home():
 
     print("Server received request for 'Home' page...")
 
-    #### not even sure if we should be passing these variables from flask, maybe html or javascript is better idk
-    test_list=['this','is','a','list','from','flask']
+    #### not even sure if we should be all passing these variables from flask, maybe html or javascript is better idk
+    fake_list=['this','is','a','list','from','flask']
     message = f'string served up by flask'
     button_name = 'Button name from flask'
     page_name = 'Minneapolis Crime Watcher'
 
-    return render_template('index.html',list=test_list,text=message,button_name=button_name,page_name=page_name)
+
+    return render_template('index.html',list=fake_list,text=message,button_name=button_name,page_name=page_name)
+
+
+### this route will pull the coordinates from the javascript
+@app.route('/coor',methods =['POST','GET'])
+def coor():
+    print('------------------------')
+    print('------------------------')
+    print('------------------------')
+    print('coor route was reached')
+    print('------------------------')
+    print('------------------------')
+    print('------------------------')
+
+
+    #### grab the request's form option to get the variables we passed from javascript
+    r = request.form
+
+
+  
+    coordinates = {'userlat':r['userlat'],'userlon':r['userlon']}
+    print("---------------------")
+    print("---------------------")
+    print("---------------------")
+    print('This variable was sent to flask from the javasacript file:')
+    print(coordinates)
+    print('the variable type is')
+    print(type(coordinates))
+    print("---------------------")
+    print("---------------------")
+    print("---------------------")
+
+
+    ####psudeo code
+    ######## hit api to get list of recent crimes in the area (x number of miles from coordinates)
+
+
+
+
+
+
+
+
+    #### I think i might actually want to make a 'results.html' page to direct to here 
+    return redirect('/')
+
 
 
 
 # # This route could be used for running the machine learning prediction
+#### also, instead of making this a seperate route it might make more sense to put this in the route above that pulls the coordinates "/coor"
 # @app.route("/load")
 # def load():
-#     print("route")
-#     # dangerscore = 8
-#     # return "the machine says your danger score is "
-#     # we could return
+    #psuedo code:
+    ### hit  https://opendata.minneapolismn.gov/ api and use the date filter to return recent crimes in the area
+
+
+    #run a function from an imported py file that makes prediction based on the users's location. This function should return recent crime in the area
+
+
+
 #     return redirect('/')
 
 
@@ -46,9 +98,13 @@ def home():
 ##### ...runing our code locally or on pythonanywhere, then executes different code depending on where we're currently hosting.
 #####
 
+
+
 if __name__ == "__main__":
     app.run(debug=True)
     
+
+
 
 
 ####### everything below this obnoxious block is test code
@@ -62,6 +118,50 @@ if __name__ == "__main__":
 ############################################################################################################
 ############################################################################################################
 ############################################################################################################
+
+
+    # crime_list=['fakecrime1','fakecrime2','fakecrime3']
+    # new_message = f'your coordinates are {coordinates}'
+    # new_button_name = 'Button name from flask'
+    # new_page_name = 'Minneapolis Crime Watcher'
+    # return render_template('index.html',list=crime_list,text=new_message,button_name=new_button_name,page_name=new_page_name)
+
+
+
+
+
+    # if 'coordinates' in globals():
+    #     print(f'coordinates passed to global variable')
+
+    #     crime_list=['fake crime 1','fake crime 2','fake crime 2']
+    #     message =f'your coordinates are {coordinates}'
+
+    # else :
+    #     crime_list=['this','is','a','list','from','flask']
+    #     message = f'string served up by flask'
+
+
+
+    ####psuedo code 
+    #### if cordinates have already been pulled, meaning the coor route was already hit,.....
+    ############# return render_template('index.html, ###one set of variables)
+    ##### else
+    ############# return render_template('index.html, second set of variables)
+
+
+    # ##### if the coordinates variable exists in the global set of variables, return different html
+    # if 'coordinates' in globals():
+    #     newmessage = f'your coordinates are {coordinates}'
+    #     return render_template('index.html',list=test_list,text=newmessage,button_name=button_name,page_name=page_name)
+    # else:
+    #     return render_template('index.html',list=test_list,text=message,button_name=button_name,page_name=page_name)
+
+
+
+
+
+
+
 
 
 # ### just using this route to get the user's ip address

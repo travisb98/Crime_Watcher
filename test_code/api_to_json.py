@@ -8,7 +8,7 @@ import pickle
 
 from sklearn.cluster import KMeans
 
-### defind the current and previous year
+### define the current and previous year
 current_year = datetime.datetime.now().year
 last_year = current_year - 1
 
