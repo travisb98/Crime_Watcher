@@ -1,16 +1,12 @@
 
 
-
 //// function that sends latitude and longitude to server in this format {'userlat':latitude, 'userlon':longitude}
 function postToFlask(data){
 
-    /// ideally I wouldn't want to hard code this url. We'll need to make this dynamic so it works with python anywhere
+    /// ideally I wouldn't want to hard code this url and other  variables. We'll need to make this dynamic so it works with python anywhere
     var server_path = 'http://127.0.0.1:5000/';
-
     var post_path ='coor';
-
     var url = server_path+post_path;
-
     var dataType = 'json';
 
     $.ajax({
@@ -29,22 +25,18 @@ function locationSucess(position){
     //// getting lat and lon from the position
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
-
     var coordinates = {'userlat':latitude, 'userlon':longitude};
+
+    /////// function from map.js
+    mapCoordinates(coordinates);
 
     ///// posts the coordinates to the server
     postToFlask(coordinates);
 
     /////////// just printing out the results for now
     console.log('---------------');
-    console.log('---------------');
-    console.log('Position:');
-    console.log(position);
-    console.log('---------------');
-    console.log('Coordinates');
+    console.log('Coordinates in Location Success Function');
     console.log(`Latitude:${latitude} ---Longitude: ${longitude}`);
-    // alert(`Latitude:${latitude} ---Longitude: ${longitude}`);
-    console.log('---------------');
     console.log('---------------');
 
 };
@@ -72,6 +64,9 @@ function getLocation(){
 
 //// event handler for button
 d3.selectAll('#button').on('click',getLocation);
+
+
+
 
 
 

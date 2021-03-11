@@ -24,29 +24,35 @@ def home():
 
     return render_template('index.html',list=fake_list,text=message,button_name=button_name)
 
-# @app.route('/results',methods =['POST','GET'])
-# @app.route('/results<coordinates>')
-# @app.route('/results<coordinates>',methods =['POST','GET'])
-# def results(coordinates):
-
-
+# # @app.route('/results',methods =['POST','GET'])
+# # @app.route('/results<coordinates>')
+# # @app.route('/results<coordinates>',methods =['POST','GET'])
+# # def results(coordinates):
 # @app.route('/results')
 # def results():
 #     print('---------------------')
 #     print('Server received request for results page')
 #     # print(coordinates)
-
-
 #     fake_list=['crime1','crime2','crime3','crime4','crime5','crime6']
 #     # result_message = f'your fake danger score is 12/10 at coordinates {coordinates}'
 #     result_message = f'your fake danger score is 12/10 at coordinates'
 #     button_name = 'Reload'
-
-
 #     return render_template('results.html',list=fake_list,text=result_message,button_name=button_name)
 
+
+
+
+## based on this youtube video i think i need to use GET instead of POST since, which will need to be changed in the coordinate sending javascript as well 
+## 'POST is better for saving stuff to a database while GET is better for using the data on the server' - youtube vid
+#### also, I think I've been thinking about laying this code out incorrectly, watch the video again 
+# GET and POST set up
+# https://www.youtube.com/watch?v=9MHYHgh4jYc&t=33s
+# I NEEEeeeEEEeeEEEeeeEEED to utilize 'session' data to store data from a POST 
+# Sessions:
+# https://www.youtube.com/watch?v=iIhAfX4iek0
 ### this route will pull the coordinates from the javascript
 # @app.route('/coor',methods =['POST'])
+# @app.route('/coor',methods =['POST','GET'])
 @app.route('/coor',methods =['POST','GET'])
 def coor():
     print('------------------------')
