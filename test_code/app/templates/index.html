@@ -10,7 +10,7 @@
 
 
   <!-- page name from flask  -->
-  <title>{{ page_name }}</title>
+  <title>Minneapolis Crime Watcher</title>
   <!-- boot strap  -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- d3  -->
@@ -46,7 +46,7 @@
 
 
   <div class="row">
-    <p class="center">Your Saftey score is {{ text }} </p>
+    <p class="center"> {{ text1 }} </p>
 
   </div>
 
@@ -55,7 +55,7 @@
   </div>
 
   <div class="row">
-      <p class="center">Safety of current surrounding area</p>
+      <p class="center">{{ text2 }}</p>
   </div>
 
 
@@ -66,12 +66,12 @@
   <!-- <div class = 'center' id="map"></div> -->
 
   <div class="row">
-    <p class="center">List of Crimes in your area</p>
+    <p class="center">{{ list_title }}</p>
   </div>
 
   <div class="row">
     <ul class='center'>
-      {% for name in list %}
+      {% for name in flask_list %}
       <li>{{name}}</li>
       {% endfor %}
     </ul>

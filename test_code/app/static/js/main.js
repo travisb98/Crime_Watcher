@@ -33,12 +33,17 @@ function locationSucess(position){
     ///// posts the coordinates to the server
     postToFlask(coordinates);
 
+    
+    // /////// function from map.js
+    // mapCoordinates(coordinates);
+
+
     /////////// just printing out the results for now
     console.log('---------------');
     console.log('Coordinates in Location Success Function');
     console.log(`Latitude:${latitude} ---Longitude: ${longitude}`);
     console.log('---------------');
-
+    
 };
 
 /// error handler that is ran when getCurrentPosition is NOT sucessful
@@ -62,8 +67,20 @@ function getLocation(){
 
 };
 
+// function clickFunc(func){
+
+//     func();
+
+//     // location.reload();
+// };
+// d3.selectAll('#button').on('click',clickFunc(getLocation));
+
+
 //// event handler for button
+
 d3.selectAll('#button').on('click',getLocation);
+// d3.selectAll('#button').on('click',location.reload());
+// location.reload();
 
 
 

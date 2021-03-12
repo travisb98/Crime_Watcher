@@ -1,58 +1,77 @@
 ######## this code is currently being ran from the "app" folder
 
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 import socket
 import geocoder
 import requests
 import json
+
+##### we shouldn't hard code this variable, we'll need to make it dynamic to detect if we're on pythonanywhere
+#### local server
+local_server = 'http://127.0.0.1:5000/'
 
 ### this module is being finalized and will return api calls
 # import crime_api
 
 #create app
 app = Flask(__name__)
+## just a random key that is needed
+app.secret_key ='thisRandomStringIsNeededWhenUsingFlaskSessions'
+
+# ##### route group 1 (doesn't work great, results page only comes up after pressing the button then refreshing the page)
+# ############################################################################################################
+# ############################################################################################################
+# ############################################################################################################
+
+
+
+@app.route('/results')
+def results():
+    print('results route reached')
+    return f'<h1>This is the results page</h1>'
 
 #  homepage
 @app.route("/")
 def home():
     print("Server received request for 'Home' page...")
 
-    #### not even sure if we should be all passing these variables from flask, maybe html or javascript is better idk
-    fake_list=['this','is','a','list','from','flask']
-    message = f'string served up by flask'
-    button_name = 'Load'
+    ###### this isn't working, maybe I should have the 2 options under here set up as 2 different routes?
+    #### if the coor route has already been accessed the the coordinates exists
+    if 'usercoor' in session:
+        print('The usercoor is present in the session  ')
 
-    return render_template('index.html',list=fake_list,text=message,button_name=button_name)
+        ### extract coordinates from session 
+        coordinates = session['usercoor']
 
-# # @app.route('/results',methods =['POST','GET'])
-# # @app.route('/results<coordinates>')
-# # @app.route('/results<coordinates>',methods =['POST','GET'])
-# # def results(coordinates):
-# @app.route('/results')
-# def results():
-#     print('---------------------')
-#     print('Server received request for results page')
-#     # print(coordinates)
-#     fake_list=['crime1','crime2','crime3','crime4','crime5','crime6']
-#     # result_message = f'your fake danger score is 12/10 at coordinates {coordinates}'
-#     result_message = f'your fake danger score is 12/10 at coordinates'
-#     button_name = 'Reload'
-#     return render_template('results.html',list=fake_list,text=result_message,button_name=button_name)
+        #### Delete the session data do avoid for loop issue
+        # session.pop('usercoor',None)
 
+        dangerscore = 7
+        flask_list=['crime1','crime2','crime3','crime4','crime5','crime6']
+        text1 = f'Your danger score at {coordinates} is {dangerscore}'
+        text2 = f'Your Location and Crimes:'
+        list_title ='List of Recent Crimes in Your Area:'
+        button_name = 'Reload'
 
+        return render_template('results.html',flask_list=flask_list,text1=text1,text2=text2,list_title=list_title,button_name=button_name)
+        # return '<h1>the usercoor in the home route was present</h1>'
+         
+    else :
+        #### this route should be hit when the user first comes to the page
+        print('The usercoor does not exist in the session')
+        flask_list=['this','is','a','list','from','flask']
+        text1 = f'This is text 1'
+        text2 = f'string served up by flask'
+        list_title ='Press Load to to Generate List of Crimes'
+        button_name = 'Load'
+        return render_template('index.html',flask_list=flask_list,text1=text1,text2=text2,list_title=list_title,button_name=button_name)
 
-
-## based on this youtube video i think i need to use GET instead of POST since, which will need to be changed in the coordinate sending javascript as well 
-## 'POST is better for saving stuff to a database while GET is better for using the data on the server' - youtube vid
-#### also, I think I've been thinking about laying this code out incorrectly, watch the video again 
-# GET and POST set up
+# GET and POST set up:
 # https://www.youtube.com/watch?v=9MHYHgh4jYc&t=33s
-# I NEEEeeeEEEeeEEEeeeEEED to utilize 'session' data to store data from a POST 
 # Sessions:
 # https://www.youtube.com/watch?v=iIhAfX4iek0
 ### this route will pull the coordinates from the javascript
-# @app.route('/coor',methods =['POST'])
-# @app.route('/coor',methods =['POST','GET'])
+
 @app.route('/coor',methods =['POST','GET'])
 def coor():
     print('------------------------')
@@ -61,62 +80,38 @@ def coor():
     print('------------------------')
     print('------------------------')
 
-    # if request.method =='POST':
-    #     rf = request.form
-    #     # coordinates = {'userlat':rf['userlat'],'userlon':rf['userlon']}
-    #     # result_message = f'your fake danger score is 12/10 at coordinates {coordinates}'
-    #     fake_list=['crime1','crime2','crime3','crime4','crime5','crime6']
-    #     button_name = 'Reload'
+    if request.method =='POST':
+        print('method was post')
+        rf = request.form
+        coordinates = {'userlat':rf['userlat'],'userlon':rf['userlon']}
+        #### storing the user coordinates in the flask session 
+        session['usercoor'] = coordinates
+        print('------------------------')
+        print('------------------------')
+        print(f'coordinates from post method{coordinates}')
+        print('------------------------')
+        print('------------------------')
+        return redirect('/')
+        # return redirect('/results')
+        # return redirect(url_for('results'))
 
-    #     return render_template('results.html',list=fake_list,text=rf,button_name=button_name)
+    else:
+        print('method was not post')
+        # return '<h1>method was not post</h1>'
+        # return ' coor route method was not post'
+        return redirect('/')
 
-
-
-
-
-    #### grab the request's form option to get the variables we passed from javascript
-    r = request.form
-    coordinates = {'userlat':r['userlat'],'userlon':r['userlon']}
-
-    print("---------------------")
-    print('This variable was sent to flask from the javasacript file:')
-    print(coordinates)
-    print('the variable type is')
-    print(type(coordinates))
-    print("---------------------")
-
-
-
-    # fake_list=['crime1','crime2','crime3','crime4','crime5','crime6']
-    # result_message = f'your fake danger score is 12/10 at coordinates {coordinates}'
-    # button_name = 'Reload'
-    # return render_template('results.html',list=fake_list,text=result_message,button_name=button_name)
-    
-
-    ####psudeo code
-    ######## hit api to get list of recent crimes in the area (x number of miles from coordinates)
-    
-    return redirect('/')
-    # return redirect(url_for('results'), code=307)
-    # return redirect(url_for('results',coordinates = coordinates))
+##### end route group 1 
+############################################################################################################
+############################################################################################################
+############################################################################################################
 
 
 
-
-
-
-
-###### the "if __name__ == "__main__"" statement will need to be different when we're hosting on pythonanywhere
-##### notes on using flask and pythonanywhere https://help.pythonanywhere.com/pages/Flask/
-#### section on how to use app.run() will be applicable here 
-##### considering the implications of this article, i think we'll need to make code that detects if we're...
-##### ...runing our code locally or on pythonanywhere, then executes different code depending on where we're currently hosting.
-#####
-
-
-
+        
 if __name__ == "__main__":
     app.run(debug=True)
+    # app.run()
     
 
 
@@ -133,6 +128,60 @@ if __name__ == "__main__":
 ############################################################################################################
 ############################################################################################################
 ############################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###### the "if __name__ == "__main__"" statement will need to be different when we're hosting on pythonanywhere
+##### notes on using flask and pythonanywhere https://help.pythonanywhere.com/pages/Flask/
+#### section on how to use app.run() will be applicable here 
+##### considering the implications of this article, i think we'll need to make code that detects if we're...
+##### ...runing our code locally or on pythonanywhere, then executes different code depending on where we're currently hosting.
+#####
+
+
+
+
+
+# @app.route('/result/<usrcoor>')
+# def result(usrcoor):
+#     return f'<h1>{usrcoor}</h1>'
+
+
+# #### grab the request's form option to get the variables we passed from javascript
+# r = request.form
+# coordinates = {'userlat':r['userlat'],'userlon':r['userlon']}
+# print("---------------------")
+# print('This variable was sent to flask from the javasacript file:')
+# print(coordinates)
+# print('the variable type is')
+# print(type(coordinates))
+# print("---------------------")
+# fake_list=['crime1','crime2','crime3','crime4','crime5','crime6']
+# result_message = f'your fake danger score is 12/10 at coordinates {coordinates}'
+# button_name = 'Reload'
+# return render_template('results.html',list=fake_list,text=result_message,button_name=button_name)
+####psudeo code
+######## hit api to get list of recent crimes in the area (x number of miles from coordinates)
+# return redirect('/')
+# return redirect(url_for('results'), code=307)
+# return redirect(url_for('results',coordinates = coordinates))
 
 
     # crime_list=['fakecrime1','fakecrime2','fakecrime3']
