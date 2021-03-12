@@ -4,8 +4,8 @@ function mapCoordinates(coordinates){
   console.log(`coordinates preformant in map function :${coordinates}`)
 
   // unpacking coordinates for leafly format
-  coordinates = [coordinates['userlat'],coordinates['userlon']]
-  console.log(`coordinates postformant in map function :${coordinates}`)
+  // coordinates = [coordinates['userlat'],coordinates['userlon']]
+  // console.log(`coordinates postformant in map function :${coordinates}`)
 
 
 

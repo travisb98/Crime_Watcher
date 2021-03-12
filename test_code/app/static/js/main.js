@@ -1,21 +1,76 @@
 
 
+function loadPage(){
+    /////// BOOO  this shouldn't be hard coded
+    var server_path = 'http://127.0.0.1:5000/';
+    // var post_path ='';
+    var post_path ='results';
+    ///// just opening the coor path, essentially trying to send a get request to the coor route
+    window.location.href = server_path+post_path;
+};
+
+
 //// function that sends latitude and longitude to server in this format {'userlat':latitude, 'userlon':longitude}
 function postToFlask(data){
 
     /// ideally I wouldn't want to hard code this url and other  variables. We'll need to make this dynamic so it works with python anywhere
     var server_path = 'http://127.0.0.1:5000/';
+    // var post_path ='';
     var post_path ='coor';
     var url = server_path+post_path;
     var dataType = 'json';
+
+    
+    // $.ajax({
+    //     type: "POST",
+    //     url: url,
+    //     data: data,
+    //     success: function(){console.log("success function ran")},
+    //     dataType: dataType
+    // });
 
     $.ajax({
         type: "POST",
         url: url,
         data: data,
-        success: function(){console.log("success function ran")},
         dataType: dataType
+    }).fail(function(){
+
+        ///// this is bad but it works, JAVASCRIPT says this post is failing to load but it isn't  
+        loadPage();
+        console.log('post failed')
     });
+
+};
+
+
+
+////do PULLS or GETS to the server via ajax
+function AJAXToFlask(data,typePG){
+
+    /// ideally I wouldn't want to hard code this url and other  variables. We'll need to make this dynamic so it works with python anywhere
+    var server_path = 'http://127.0.0.1:5000/';
+    // var post_path ='results';
+    var post_path ='coor';
+    var url = server_path+post_path;
+    var dataType = 'json';
+
+
+    $.ajax({
+        type: typePG,
+        url: url,
+        data: data,
+        dataType:dataType,
+
+    }).done(function(msg){
+        console.log(`ajax request complete with message: ${msg}`);
+        // loadPage();
+        
+
+    }).fail(function(){console.log('request failed')});
+
+
+
 };
 
 
@@ -28,10 +83,17 @@ function locationSucess(position){
     var coordinates = {'userlat':latitude, 'userlon':longitude};
 
     /////// function from map.js
-    mapCoordinates(coordinates);
+    // mapCoordinates(coordinates);
 
     ///// posts the coordinates to the server
     postToFlask(coordinates);
+
+    ///// posts the coordinates to the server
+    // AJAXToFlask(coordinates,'POST');
+
+
+
+    // pauseFunc;
 
     
     // /////// function from map.js
@@ -43,7 +105,9 @@ function locationSucess(position){
     console.log('Coordinates in Location Success Function');
     console.log(`Latitude:${latitude} ---Longitude: ${longitude}`);
     console.log('---------------');
-    
+
+
+
 };
 
 /// error handler that is ran when getCurrentPosition is NOT sucessful
@@ -67,21 +131,57 @@ function getLocation(){
 
 };
 
-// function clickFunc(func){
 
-//     func();
 
-//     // location.reload();
+// function loadPage(){
+//     /////// BOOO  this shouldn't be hard coded
+//     var server_path = 'http://127.0.0.1:5000/';
+//     // var post_path ='';
+//     var post_path ='coor';
+//     ///// just opening the coor path, essentially trying to send a get request to the coor route
+//     window.location.href = server_path+post_path;
 // };
-// d3.selectAll('#button').on('click',clickFunc(getLocation));
 
+
+
+///// to set a delay
+function pauseFunc(){
+
+    setTimeout(function(){
+        alert("I am setTimeout");
+    },1000); //delay is in milliseconds 
+
+};
+
+
+
+
+function clickFunc(){
+
+    ///// run get location function to sent POST request to server
+    
+    ////// time delay
+    ////// load new page
+    // $.when(getLocation).then(pauseFunc).then(loadPage);
+    // $.when(getLocation).then(loadPage);
+    // getLocation;
+    // loadPage;
+
+
+};
 
 //// event handler for button
+// d3.selectAll('#button').on('click',clickFunc);
 
 d3.selectAll('#button').on('click',getLocation);
-// d3.selectAll('#button').on('click',location.reload());
-// location.reload();
 
+
+
+
+
+
+// psuedo code
+//  on button click, post results to server, THEN load new page, THEN add map to results page
 
 
 
@@ -99,7 +199,46 @@ d3.selectAll('#button').on('click',getLocation);
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// ////do PULLS or GETS to the server via ajax
+// function AJAXToFlask(data,typePG){
 
+//     /// ideally I wouldn't want to hard code this url and other  variables. We'll need to make this dynamic so it works with python anywhere
+//     var server_path = 'http://127.0.0.1:5000/';
+//     // var post_path ='results';
+//     var post_path ='coor';
+//     var url = server_path+post_path;
+//     var dataType = 'json';
+
+//     $.ajax({
+//         type: typePG,
+//         url: url,
+//         data: data,
+//         success: function(){console.log("success function ran")},
+//         dataType: dataType
+//     });
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ///////// potentially useful time delay code
+// alert("before setTimeout");
+
+// setTimeout(function(){
+//         alert("I am setTimeout");
+//    },1000); //delay is in milliseconds 
+
+//   alert("after setTimeout");
+// // ////////////////////////
 
 
 

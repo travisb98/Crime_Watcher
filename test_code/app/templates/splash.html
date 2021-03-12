@@ -36,20 +36,11 @@
   <br>
   <br>
 
+
+ 
+
   <div class ='row'>
     <button id ='button' type="button" class="btn btn-primary">{{ button_name }}</button>
-  </div>
-
-  <div class="row">
-    <p class="center"> {{ text1 }} </p>
-  </div>
-
-  <div class= "row" id="severity_gauge">
-    <img src="https://i.stack.imgur.com/Z7Qk4.png" alt="Chart Here" class="center">
-  </div>
-
-  <div class="row">
-      <p class="center">{{ text2 }}</p>
   </div>
 
 
@@ -57,18 +48,7 @@
     <!-- The div where we will inject our map -->
       <div class = 'center' id="map"></div>
   </div>
-  <!-- <div class = 'center' id="map"></div> -->
-
-  <div class="row">
-    <p class="center">{{ list_title }}</p>
-  </div>
-
-  <div class="row">
-    <ul class='center'>
-      {% for name in flask_list %}
-      <li>{{name}}</li>
-      {% endfor %}
-    </ul>
+ 
 
   </div>
 
