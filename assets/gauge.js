@@ -39,7 +39,7 @@ var mask = document.querySelector("#mask");
 var meter_needle =  document.querySelector("#meter_needle");
  
 function range_change_event() {
-    var percent = 50;
+    var percent = 100;
     var meter_value = semi_cf - ((percent * semi_cf) / 100);
     mask.setAttribute("stroke-dasharray", meter_value + "," + cf);
     meter_needle.style.transform = "rotate(" + 
