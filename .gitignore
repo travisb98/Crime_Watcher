@@ -1,6 +1,7 @@
 app/config.py
 .vscode/
 config.py
+flask_session/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
