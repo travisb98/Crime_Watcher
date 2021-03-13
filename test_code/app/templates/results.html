@@ -89,10 +89,27 @@
   <script src="./static/js/main.js" type = "text/javascript"></script>
 
   <script>
+    // console.log(`{{  flask_list  }}`)
+
+    var crimecoordinates=`{% for x in flask_list %}
+        {{[x.centerLong,x.centerLat]}}
+      {% endfor %}`;
+
+    // console.log(crimecoordinates);
+
+    // crimecoordinates = crimecoordinates.split('↵')
+
 
     //  maybe this should be in it's own javascript file with the function that makes the guage
-    mapCoordinates([`{{ lat }}`,`{{ lon }}`])
-    
+    mapCoordinates([`{{ userlat }}`,`{{ userlon }}`],crimecoordinates);
+    // addMarkerAndPopup(`{{ userlat }}`,`{{ userlon }}`);
+    // var userlat = parseFloat(`{{ userlat }}`)
+    // var userlon = parseFloat(`{{ userlon }}`)
+
+    // addMarkerAndPopup([userlat,userlon],'pop up message');
+
+    // console.log(`{{ userlat }}`)
+    // console.log(typeof(`{{ userlat }}`))
 
 
   </script>

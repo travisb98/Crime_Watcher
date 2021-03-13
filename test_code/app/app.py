@@ -9,12 +9,14 @@ import geocoder
 import requests
 import json
 
+## this module is being finalized and will return api calls
+import crime_api
+
 ##### we shouldn't hard code this variable, we'll need to make it dynamic to detect if we're on pythonanywhere
 #### local server
 local_server = 'http://127.0.0.1:5000/'
 
-### this module is being finalized and will return api calls
-# import crime_api
+
 
 #create app
 app = Flask(__name__)
@@ -25,7 +27,6 @@ SESSION_TYPE = 'filesystem'
 
 app.config.from_object(__name__)
 Session(app)
-# CORS(app)
 
 
 
@@ -33,8 +34,6 @@ Session(app)
 def home():
 
     print('home page was reached')
-
-    # return ',.'
     return render_template('splash.html',button_name='splash page button name')
 
 
@@ -42,10 +41,9 @@ def home():
 @app.route("/coor",methods =['POST','GET'])
 def coor():
     print('-------------------------')
-    print('-------------------------')
     print('coor route reached')
     print('-------------------------')
-    print('-------------------------')
+
 
     #######
     if request.method == 'POST':
@@ -55,19 +53,11 @@ def coor():
         coordinates = {'userlat':rf['userlat'],'userlon':rf['userlon']}
         #### storing the user coordinates in the flask session 
         session['usercoor'] = coordinates
-
-
         sessionCoordinates = session['usercoor']
 
         print(f'the coordinates in the session are{sessionCoordinates}')
 
-        ###### not sure if we should be redirecting to home here
-        # return redirect('/')
-        # return redirect('/coor')
         return redirect('/results')
-        # return redirect(url_for('results'))
-
-
 
     else:
         print('the method must have been GET')
@@ -83,8 +73,6 @@ def coor():
             print('the coordinate variable was not saved to the session when the GET request was made')
             print('this shouldnt be happening')
             rf = request.form
-
-            # return redirect('/')
             return f'<h1> the coordinate variable was not saved to the session when the GET request was made. Request Form: {rf}</h1>'
 
 
@@ -99,19 +87,23 @@ def results():
         ### get the coordinates variable from the session
         coordinates = session['usercoor']
         print(f'session coordinates are {coordinates}')
-
+        #### these are place holder variables
         dangerscore = 8
-        flask_list=['crime1','crime2','crime3','crime4','crime5','crime6']
+
+        #### call api to return list of crimes that occured nearby
+        flask_list = crime_api.nearbyCrimes(float(coordinates['userlat']),float(coordinates['userlon']),5)
 
         text1 = f'Your danger score is {dangerscore} '
         text2 = f'Your coordinates are {coordinates}'
         list_title ='List of crimes'
         button_name = 'reLoad'
 
-        lat = coordinates['userlat']
-        lon = coordinates['userlon']
+        userlat = coordinates['userlat']
+        userlon = coordinates['userlon']
 
-        return render_template('results.html', flask_list=flask_list,text1=text1,text2=text2,list_title=list_title,button_name=button_name,lat=lat,lon=lon)
+        # session.pop('usercoor',None)
+
+        return render_template('results.html', flask_list=flask_list,text1=text1,text2=text2,list_title=list_title,button_name=button_name,userlat=userlat,userlon=userlon)
         # return render_template('results.html',button_name='buttooooon', text1 = coordinates)
         # return f'<h1>results page coordinates{coordinates}</h1>'
     else:
