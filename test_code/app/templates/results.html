@@ -6,10 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
 
-
-
-
-  <!-- page name from flask  -->
   <title>Minneapolis Crime Watcher</title>
   <!-- boot strap  -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -89,27 +85,34 @@
   <script src="./static/js/main.js" type = "text/javascript"></script>
 
   <script>
-    // console.log(`{{  flask_list  }}`)
 
-    var crimecoordinates=`{% for x in flask_list %}
-        {{[x.centerLong,x.centerLat]}}
-      {% endfor %}`;
+    //// returning coordinates as a string from flask
+    var crime_coordinates_string=`{% for x in flask_list %}{{x.centerLat }},{{x.centerLong }};{% endfor %}`;
+    /// unpacking the coordinates from the jinja string
+    var crime_coor_list=crime_coordinates_string
+                        .split(';')
+                        .map(function(item){
+                          return item.split(',');
+                        }).slice(0, -1);
+    ///// converting coordinates to float, could be cleaner
+    crime_coor_list = crime_coor_list.map(function(item){
+                                          var floatcoors = [parseFloat(item[0]),parseFloat(item[1])];
+                                          return floatcoors
+                                          // return [parseFloat(item[0]),parseFloat(item(1)))];
+    });
 
-    // console.log(crimecoordinates);
+  
+    //// get crime descriptions via jinja
+    var crime_descriptions = `{% for x in flask_list %} {{x.description }}; {% endfor %}`.split(';');
 
-    // crimecoordinates = crimecoordinates.split('↵')
 
 
-    //  maybe this should be in it's own javascript file with the function that makes the guage
-    mapCoordinates([`{{ userlat }}`,`{{ userlon }}`],crimecoordinates);
-    // addMarkerAndPopup(`{{ userlat }}`,`{{ userlon }}`);
-    // var userlat = parseFloat(`{{ userlat }}`)
-    // var userlon = parseFloat(`{{ userlon }}`)
+    mapCoordinates([`{{ userlat }}`,`{{ userlon }}`],crime_coor_list,crime_descriptions);
 
-    // addMarkerAndPopup([userlat,userlon],'pop up message');
 
-    // console.log(`{{ userlat }}`)
-    // console.log(typeof(`{{ userlat }}`))
+
+
+
 
 
   </script>

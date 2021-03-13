@@ -28,7 +28,7 @@ function postToFlask(data){
     //     success: function(){console.log("success function ran")},
     //     dataType: dataType
     // });
-
+    ///// sending data to 
     $.ajax({
         type: "POST",
         url: url,
@@ -36,9 +36,9 @@ function postToFlask(data){
         dataType: dataType
     }).fail(function(){
 
-        ///// this is bad but it works, JAVASCRIPT says this post is failing to load but it isn't  
+        ///// this is bad and i have not idea why it works but it works, JAVASCRIPT says this post is failing to load but its responding on the server side
         loadPage();
-        console.log('post failed')
+        console.log('post failed?????')
     });
 
 };
