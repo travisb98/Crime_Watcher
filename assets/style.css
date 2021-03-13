@@ -52,11 +52,11 @@ html {
   top: 57%;
 }
 #meter_needle {
-  height: 25%;
+  height: 40%;
   left: 0;
   margin: auto;
   position: absolute;
-  right: 21%;
+  right: 0;
   top: 10%;
   transform-origin: bottom center;
   /*orientation fix*/
