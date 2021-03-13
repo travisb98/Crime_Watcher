@@ -17,51 +17,74 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f56856">
-        <a class="navbar-brand" href="#">Crime Watcher</a>
+        <a class="navbar-brand">Crime Watcher</a>
     </nav>
+    <br>
+    <br>
+    <div class="row">
+        <p class="center">Current location crime level</p>
+    </div>
+        <div class="center" id="wrapper">
+            <svg id="meter">
+                <circle id="outline_curves" class="circle outline" 
+                cx="50%" cy="50%"></circle>
+
+                <!-- 0-25% range green zone -->
+                <circle id="low" r="150" cx="50%" cy="50%" stroke="#00b300"
+                stroke-width="30" fill = "none" stroke-dasharray="471,943" fill="none"></circle>
+
+                <!-- 25% or more range yellow zone -->
+                <circle id="low-med" r="150" cx="50%" cy="50%" stroke="#ffff00"
+                stroke-width="30" fill = "none" stroke-dasharray="353,943" fill="none"></circle>
+
+                <!-- 50% or more range orange zone -->
+                <circle id="med-high" r="150" cx="50%" cy="50%" stroke="#ffa500"
+                stroke-width="30" fill = "none" stroke-dasharray="236,943" fill="none"></circle>
+
+                <!-- 75% or more range red zone -->
+                <circle id="high" r="150" cx="50%" cy="50%" stroke="#ff0000"
+                stroke-width="30" fill = "none" stroke-dasharray="118,943" fill="none"></circle>
+
+                <!-- Mask -->
+                <circle id="mask" r="150" cx="50%" cy="50%" stroke="#f6f6f6"
+                stroke-width="32.5" stroke-dasharray="471, 943" fill="none">
+                </circle>
+                <!-- Outline Ends (Grey) -->
+                <circle id="outline_ends" r="150" cx="50%" cy="50%" stroke="#f9f9f9"
+                stroke-width="32.5" stroke-dasharray="2, 469" fill="none"></circle>
+
+                
+                                    
+            </svg>
+            <img class="center" id="meter_needle" src="/images/gauge_needle.svg" alt="">
+            <label class="center" id="lbl" id="value" for="">0</label>
+        </div>
+    <script type="text/javascript" src="../assets/gauge.js"></script>
 <br>
 <br>
-<div class="container">
+<br>
 
     <div class="row">
-        <label for="API_code">Input API Code</label>
-        <input id="API_code" type="text">
+        <p class="center">Safety of current and surrounding areas</p>
+
     </div>
-</div>
-<br>
-<br>
-<div class="row">
-    <p class="center">Safety of current area</p>
-
-</div>
-<div class= "row" id="severity_gauge">
-        
-        
-        <img src="https://i.stack.imgur.com/Z7Qk4.png" alt="Chart Here" class="center">
-</div>
-<br>
-<br>
-<div class="row">
-    <p class="center">Safety of current and surrounding areas</p>
-
-</div>
 
 
-<div class = 'center' id='maprow' class="row">
-   <!-- The div where we will inject our map -->
-    <div class = 'center' id="map"></div>
-</div>
+    <div class = 'center' id='maprow' class="row">
+    <!-- The div where we will inject our map -->
+        <div class = 'center' id="map"></div>
+    </div>
 
 
-   <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-     crossorigin=""></script>
-   <!-- API key -->
-    <script type="text/javascript" src="../assets/config.js"></script>
-   <!-- JS -->
-    <script type="text/javascript" src="../assets/map.js"></script>
-     
+    <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <!-- API key -->
+        <script type="text/javascript" src="../assets/config.js"></script>
+    <!-- JS -->
+        <script type="text/javascript" src="../assets/map.js"></script>
+          
 </body>
 
 </html>
