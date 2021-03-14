@@ -41,11 +41,3 @@ function addMarker(myMap,lat,lon,color,text){
 
 };
 
-
-
-
-
-
-
-// L.marker(minneapolis_coordinates, {title: "marker",icon:colorIcon('grey')}).addTo(myMap).bindPopup('blah');
-
