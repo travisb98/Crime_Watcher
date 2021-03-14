@@ -1,8 +1,8 @@
 ######## this code is currently being ran from the "app" folder
 
-from flask import Flask, render_template, jsonify, request, redirect, url_for, session
-from flask_session import Session
-from flask_cors import CORS
+from flask import Flask, render_template, jsonify, request, redirect, url_for, Response
+# from flask_session import Session
+# from flask_cors import CORS
 
 import socket
 import geocoder
@@ -21,103 +21,43 @@ local_server = 'http://127.0.0.1:5000/'
 #create app
 app = Flask(__name__)
 ## just a random key that is needed for session
-app.secret_key ='thisRandomStringIsNeededWhenUsingFlaskSessions'
-SECRET_KEY = "thisRandomStringIsNeededWhenUsingFlaskSessions"
-SESSION_TYPE = 'filesystem'
+# app.secret_key ='thisRandomStringIsNeededWhenUsingFlaskSessions'
+# SECRET_KEY = "thisRandomStringIsNeededWhenUsingFlaskSessions"
+# SESSION_TYPE = 'filesystem'
 
-app.config.from_object(__name__)
-Session(app)
-
-
+# app.config.from_object(__name__)
+# Session(app)
 
 @app.route("/")
 def home():
-
-    print('home page was reached')
-    return render_template('splash.html',button_name='splash page button name')
+    return render_template('index.html')
 
 
-# @app.route("/coor",methods =['POST'])
-@app.route("/coor",methods =['POST','GET'])
-def coor():
-    print('-------------------------')
-    print('coor route reached')
-    print('-------------------------')
+@app.route("/load", methods =['POST','GET'])
+def load():
 
-
-    #######
+    ## after hitting the api to get crimes in the are, I should look up the danger score for each crime and add it to the crime list
     if request.method == 'POST':
-        print('request method was POST')
-        #### get the coordinates that we posted
-        rf = request.form
-        coordinates = {'userlat':rf['userlat'],'userlon':rf['userlon']}
-        #### storing the user coordinates in the flask session 
-        session['usercoor'] = coordinates
-        sessionCoordinates = session['usercoor']
+        #### we'll want to fill this danger score in once it's determined
+        danger_score = 7
+        data = {
+            'userData':{'dangerScore':danger_score,'userLat':float(request.form['userLat']),'userLong':float(request.form['userLong'])},
+            'crimeData':crime_api.nearbyCrimes(request.form,5)}
 
-        print(f'the coordinates in the session are{sessionCoordinates}')
 
-        return redirect('/results')
+        json_data = json.dumps(data)
 
+        # return response to server
+        return Response(json_data, mimetype='application/json') 
     else:
-        print('the method must have been GET')
-        if 'usercoor' in session:
-            print('The usercoor is present in the session  ')
-
-            ### extract coordinates from session 
-            coordinates = session['usercoor']
-
-            return f'<h1>Get Method on COOR route and coordinates exist in session {coordinates}</h1>'
-
-        else:
-            print('the coordinate variable was not saved to the session when the GET request was made')
-            print('this shouldnt be happening')
-            rf = request.form
-            return f'<h1> the coordinate variable was not saved to the session when the GET request was made. Request Form: {rf}</h1>'
+        ### if someboy types /load in the url
+        return redirect('/')
 
 
 
-@app.route('/results')
-def results():
-    print('reached results page')
-
-    if 'usercoor' in session:
-        print('usecoor was present in session')
-
-        ### get the coordinates variable from the session
-        coordinates = session['usercoor']
-        print(f'session coordinates are {coordinates}')
-        #### these are place holder variables
-        dangerscore = 8
-
-        #### call api to return list of crimes that occured nearby
-        flask_list = crime_api.nearbyCrimes(float(coordinates['userlat']),float(coordinates['userlon']),5)
-
-        text1 = f'Your danger score is {dangerscore} '
-        text2 = f'Your coordinates are {coordinates}'
-        list_title ='List of crimes'
-        button_name = 'reLoad'
-
-        userlat = coordinates['userlat']
-        userlon = coordinates['userlon']
-
-        # session.pop('usercoor',None)
-
-        return render_template('results.html', flask_list=flask_list,text1=text1,text2=text2,list_title=list_title,button_name=button_name,userlat=userlat,userlon=userlon)
-        # return render_template('results.html',button_name='buttooooon', text1 = coordinates)
-        # return f'<h1>results page coordinates{coordinates}</h1>'
-    else:
-        print ('user coor was not present in session by the time the results page was hit')
-
-        return f'<h1>user coor was not present in session</h1>'
-
-        
 if __name__ == "__main__":
     app.run(debug=True)
     # app.run()
-
-
-
 
 
 
@@ -132,6 +72,108 @@ if __name__ == "__main__":
 ############################################################################################################
 ############################################################################################################
 ############################################################################################################
+
+
+#### route group 3, this is what I had before the last saturday class
+# # # # ############################################################################################################
+# # # # ############################################################################################################
+# # # # ############################################################################################################
+
+# @app.route("/")
+# def home():
+
+#     print('home page was reached')
+#     return render_template('splash.html',button_name='splash page button name')
+
+
+# # @app.route("/coor",methods =['POST'])
+# @app.route("/coor",methods =['POST','GET'])
+# def coor():
+#     print('-------------------------')
+#     print('coor route reached')
+#     print('-------------------------')
+
+
+#     #######
+#     if request.method == 'POST':
+#         print('request method was POST')
+#         #### get the coordinates that we posted
+#         rf = request.form
+#         # coordinates = {'userlat':rf['userlat'],'userlon':rf['userlon']}
+#         coordinates ={'userlat':44.928755,'userlon':-93.276092} #### dummy coordinates
+#         #### storing the user coordinates in the flask session 
+#         session['usercoor'] = coordinates
+#         sessionCoordinates = session['usercoor']
+#         [44.928755,-93.276092]
+
+#         print(f'the coordinates in the session are{sessionCoordinates}')
+
+#         # esreq = requests.Request(method=request.method,url='http://127.0.0.1:5000/results')
+
+
+#         json_data = json.dumps(coordinates)
+#         # return some data
+#         return Response(json_data, mimetype='application/json') ##### use this one from class!
+
+
+#     else:
+#         print('the method must have been GET')
+#         if 'usercoor' in session:
+#             print('The usercoor is present in the session  ')
+
+#             ### extract coordinates from session 
+#             coordinates = session['usercoor']
+
+#             return f'<h1>Get Method on COOR route and coordinates exist in session {coordinates}</h1>'
+
+#         else:
+#             print('the coordinate variable was not saved to the session when the GET request was made')
+#             print('this shouldnt be happening')
+#             rf = request.form
+#             return f'<h1> the coordinate variable was not saved to the session when the GET request was made. Request Form: {rf}</h1>'
+
+
+# @app.route('/results')
+# def results():
+#     print('reached results page')
+
+#     if 'usercoor' in session:
+#         print('usecoor was present in session')
+
+#         ### get the coordinates variable from the session
+#         coordinates = session['usercoor']
+#         print(f'session coordinates are {coordinates}')
+#         #### these are place holder variables
+#         dangerscore = 8
+
+#         #### call api to return list of crimes that occured nearby
+#         flask_list = crime_api.nearbyCrimes(float(coordinates['userlat']),float(coordinates['userlon']),5)
+
+#         text1 = f'Your danger score is {dangerscore} '
+#         text2 = f'Your coordinates are {coordinates}'
+#         list_title ='List of crimes'
+#         button_name = 'reLoad'
+
+#         userlat = coordinates['userlat']
+#         userlon = coordinates['userlon']
+
+#         # session.pop('usercoor',None)
+
+#         return render_template('results.html', flask_list=flask_list,text1=text1,text2=text2,list_title=list_title,button_name=button_name,userlat=userlat,userlon=userlon)
+#         # return render_template('results.html',button_name='buttooooon', text1 = coordinates)
+#         # return f'<h1>results page coordinates{coordinates}</h1>'
+#     else:
+#         print ('user coor was not present in session by the time the results page was hit')
+
+#         return f'<h1>user coor was not present in session</h1>'
+# ##### End route group 3
+# # # # ############################################################################################################
+# # # # ############################################################################################################
+# # # # ############################################################################################################
+
+
+
+
 
 
 #### route group 2

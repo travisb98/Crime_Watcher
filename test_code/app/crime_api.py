@@ -57,16 +57,33 @@ def callCrimeAPI(daysback):
     return clean_crime_list
 
 #### pass in  the latitude, longitude and number of days back to return recent nearby crimes
-def nearbyCrimes(lat,lon,daysback):
+def nearbyCrimes(user_coordinates,daysback):
+
+
+    lat = float(user_coordinates['userLat'])
+
+    lon = float(user_coordinates['userLong'])
+
+
     apiresults = callCrimeAPI(daysback)
 
     # print(f'length of api results: {len(apiresults)}')
 
     nearby_crimes_list =[]
 
+    # def sortKeyFunc():
+
+
     for crime in apiresults:
         if (lon-.02) < crime['centerLong'] < (lon+.02) and (lat-.02) < crime['centerLat'] < (lat+.02):
             nearby_crimes_list.append(crime)
+    #### sort crimes by date(figure out how to sort by time)
+    # nearby_crimes_list = sorted(nearby_crimes_list, key= lambda crime: (crime['date'], datetime.datetime.strptime(crime['time'],'%H:%M:%S')))
+    
+    nearby_crimes_list = sorted(nearby_crimes_list, key= lambda crime: crime['date'])
+
+
+
     # print(f'length of nearby crimes:{len(nearby_crimes_list)}')
 
     return nearby_crimes_list

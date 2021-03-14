@@ -37,11 +37,11 @@
   <br>
 
   <div class ='row'>
-    <button id ='button' type="button" class="btn btn-primary center">{{ button_name }}</button>
+    <button id ='button' type="button" class="btn btn-primary ">Load</button>
   </div>
 
   <div class="row">
-    <p class="center"> {{ text1 }} </p>
+    <p class="center"> Your Danger Score is {{ danger_score }} </p>
   </div>
 
   <div class= "row" id="severity_gauge">
@@ -49,7 +49,7 @@
   </div>
 
   <div class="row">
-      <p class="center">{{ text2 }}</p>
+      <p class="center">Crimes in your area at coordinates: {{ user_coordinates }}</p>
   </div>
 
 
@@ -60,19 +60,18 @@
   <!-- <div class = 'center' id="map"></div> -->
 
   <div class="row">
-    <p class="center">{{ list_title }}</p>
+    <p class="center">Crimes in your area:</p>
   </div>
 
   <div class="row">
     <ul class='center'>
-      {% for name in flask_list %}
+      {% for name in crime_list %}
       <li>{{name}}</li>
       {% endfor %}
     </ul>
 
   </div>
 
-  
 
 
   <!-- Leaflet JS -->
