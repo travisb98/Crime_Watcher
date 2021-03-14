@@ -4,8 +4,11 @@ import json
 import datetime
 import pickle
 import math
+import random
 import numpy as np
 from sklearn.cluster import KMeans
+from sklearn.linear_model import LinearRegression
+
 
 # define the current and previous year
 current_year = datetime.datetime.now().year
@@ -23,7 +26,7 @@ def callAndStore(year):
 
 crime_list=[]
 
-# for all features in the current and prior year.....
+#This takes all of the relevant data from the reported crimes of the current and previous year
 for crime in (callAndStore(current_year)+callAndStore(last_year)):
     clean_crime={
         'date':datetime.datetime.fromtimestamp(crime['attributes']['reportedDateTime']/1000).strftime("%m/%d/%Y"),
@@ -34,21 +37,7 @@ for crime in (callAndStore(current_year)+callAndStore(last_year)):
         }
     crime_list.append(clean_crime)
 
-incidents = pd.DataFrame(crime_list)
-
-Clusters=500
-# Initialize and Fit KMeans Model
-clusterer = KMeans(n_clusters=Clusters,random_state=42).fit(incidents[["centerLong","centerLat"]])
-
-# Run Predictions
-predictions = clusterer.predict(incidents[["centerLong","centerLat"]])
-
-# Add column for clusters to incidents dataframe
-incidents["cluster"] = predictions
-
-# Save Model using Pickle
-# pickle.dump(clusterer, open("../models/clusterer.pkl", "wb"))
-
+#This is a list of all crimes found so far and the correlated severity
 crime_severity={
 "AUTOMOBILE THEFT": 4,
 "THEFT-MOTR VEH PARTS": 2.5,
@@ -96,38 +85,3 @@ crime_severity={
 "GAS STATION DRIV-OFF": 2.5,
 "DO NOT USE": 0
 }
-
-#Set parameters for machine learning algorithm
-PriorDays=120
-# today=datetime.date.today()
-today=datetime.date(2021,1,1)
-InitDay=today-datetime.timedelta(days=PriorDays)
-
-counter=0
-day=InitDay
-while day < today:
-    counter+=1
-    day+=datetime.timedelta(days=1)
-print(counter)
-
-#This assigns a danger value to each cluster
-Cluster_Danger=[[0 for x in range(Clusters)] for y in range(PriorDays)]
-
-# for crime in crime_list:
-#     try:
-#         Cluster_Danger[clusterer.predict([[crime["centerLong"],crime["centerLat"]]])[0]]+=crime_severity[crime["description"]]
-#     except KeyError:
-#         print("An error occured on the keys")
-#         print(crime["description"])
-#         print("")
-# print(Cluster_Danger)
-
-# #This creates a normalized danger value for each cluster between 0 and 10
-# Normal_Cluster_Danger=[]
-# MaxDanger=max(Cluster_Danger)
-# for cluster in Cluster_Danger:
-#     Normal_Cluster_Danger.append(math.ceil(cluster/MaxDanger*10))
-# print("")
-# print("")
-# print(Normal_Cluster_Danger)
-
