@@ -107,7 +107,6 @@ activities to look at
     - lsd
 
 
-
 # steps
     - ETL 
         - look into API or CSV options, make it download
@@ -132,3 +131,11 @@ activities to look at
 6. predict current time period and return value
 
 
+# notes on python anywhere
+
+https://www.pythonanywhere.com/
+
+- depending on the modules we'll be using, 
+- PythonAnywhere has a bunch of modules installed, which is great. However, if we're using modules that aren't included in their prepackaged environment, we'll need to create a virtual environment
+- Which modules are already included in PythonAnywhere : https://www.pythonanywhere.com/batteries_included/
+- Notes on setting up a virtual environment : https://help.pythonanywhere.com/pages/Virtualenvs

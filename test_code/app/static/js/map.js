@@ -15,13 +15,14 @@ function colorIcon(color){
   return icon ;
 };
 
-//////// adds the map to the 
+//////// adds the map to the  
 function addMap(lat,lon,api_key){
   var myMap = L.map("map", {
     center: [lat,lon],
     zoom: 25
   });
   // Add background layer 
+  ////// i wonder if we could make 
   L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
     tileSize: 512,
@@ -30,7 +31,14 @@ function addMap(lat,lon,api_key){
     id: "mapbox/streets-v11",
     accessToken: api_key
   }).addTo(myMap);
+
+  console.log('Title layer')
+
+
   return myMap
+
+
+
 
 };
 
