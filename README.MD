@@ -105,13 +105,13 @@ https://www.pythonanywhere.com/
 - Notes on setting up a virtual environment : https://help.pythonanywhere.com/pages/Virtualenvs
 - Since many of the modules we used were not included with PythonAnywhere's prepackaged environment. We had to make a virtual environment, which was actually very easy.
 - PythonAnywhere's Guide to deploying a web app:
- ![Step 1](./images/deploying_a_web_app/CAPTURE1.JPG "Step 1")
- ![Step 2](./images/deploying_a_web_app/CAPTURE2.JPG "Step 2")
- ![Step 3](./images/deploying_a_web_app/CAPTURE3.JPG "Step 3")
- ![Step 4](./images/deploying_a_web_app/CAPTURE4.JPG "Step 4")
- ![Step 5](./images/deploying_a_web_app/CAPTURE5.JPG "Step 5")
- ![Step 6](./images/deploying_a_web_app/CAPTURE6.JPG "Step 6")
- ![Step 7](./images/deploying_a_web_app/CAPTURE7.JPG "Step 7")
+ ![Step 1](./images/deploying_a_web_app/Capture1.JPG "Step 1")
+ ![Step 2](./images/deploying_a_web_app/Capture2.JPG "Step 2")
+ ![Step 3](./images/deploying_a_web_app/Capture3.JPG "Step 3")
+ ![Step 4](./images/deploying_a_web_app/Capture4.JPG "Step 4")
+ ![Step 5](./images/deploying_a_web_app/Capture5.JPG "Step 5")
+ ![Step 6](./images/deploying_a_web_app/Capture6.JPG "Step 6")
+ ![Step 7](./images/deploying_a_web_app/Capture7.JPG "Step 7")
 
 
 # Location Test
