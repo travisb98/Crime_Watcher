@@ -16,6 +16,7 @@
 - review lat, lon vs lon, lat issue in danger_score_algorithm(Joe Kell)
 - Present with python anywhere and ask for a class mate in minneapolis to share their screen and demonstrate our app
 - make sure to upload a finalized version of the app to pythonAnywhere. Or better yet, connect pythonAnywhere account to github repository(Travis)
+- figure out if we can move api calls to the backend to protect our keys
 
 
 ## Overview
