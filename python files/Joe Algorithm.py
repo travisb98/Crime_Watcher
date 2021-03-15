@@ -9,7 +9,6 @@ import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.linear_model import LinearRegression
 
-
 # define the current and previous year
 current_year = datetime.datetime.now().year
 last_year = current_year - 1
@@ -85,3 +84,90 @@ crime_severity={
 "GAS STATION DRIV-OFF": 2.5,
 "DO NOT USE": 0
 }
+
+#These are the parameters for how much data the linear regression model will consider
+#After a thorough analysis we found that 50 clusters and 14 days of prior information was best
+Clusters = 50
+PriorDays = 14
+
+incidents = pd.DataFrame(crime_list)
+
+# Initialize and Fit KMeans Model
+clusterer = KMeans(n_clusters=Clusters,random_state=42).fit(incidents[["centerLong","centerLat"]])
+
+# Run Predictions
+predictions = clusterer.predict(incidents[["centerLong","centerLat"]])
+
+# Add column for clusters to incidents dataframe
+incidents["cluster"] = predictions
+
+# Save Model using Pickle
+#pickle.dump(clusterer, open("../models/clusterer.pkl", "wb"))
+
+today=datetime.date.today()
+
+InitDay=today-datetime.timedelta(days=PriorDays)
+
+#This assigns a danger value to each cluster that is not normalized
+Cluster_Danger=[[0 for x in range(Clusters)] for y in range(PriorDays)]
+
+for crime in crime_list:
+    MDY = [int(x) for x in crime["date"].split("/")]
+    date = datetime.date(MDY[2],MDY[0],MDY[1])
+    if date == InitDay:
+        try:
+            Cluster_Danger[0][clusterer.predict([[crime["centerLong"],crime["centerLat"]]])[0]]+=crime_severity[crime["description"]]
+        except KeyError:
+            print("An error occured on the keys")
+            print(crime["description"])
+            print("")
+    elif date > InitDay and date < today:
+        num=int(str(date-InitDay).split(",")[0].split()[0])
+        try:
+            Cluster_Danger[num][clusterer.predict([[crime["centerLong"],crime["centerLat"]]])[0]]+=crime_severity[crime["description"]]
+        except KeyError:
+            print("An error occured on the keys")
+            print(crime["description"])
+            print("")
+
+#This creates a Scaled danger value for each cluster between 0 and 10
+MaxDanger=0
+for day in Cluster_Danger:
+    if MaxDanger<max(day):
+        MaxDanger=max(day)
+
+Scaled_Cluster_Danger=[[] for y in range(PriorDays)]
+for day in range (PriorDays):
+    for cluster in Cluster_Danger[day]:
+        Scaled_Cluster_Danger[day].append(cluster/MaxDanger*10)
+
+Training_Data=[]
+for d,day in enumerate(Scaled_Cluster_Danger):
+    for c,cluster in enumerate(day):
+        Training_Data.append({
+            "Day": d,
+            "Cluster": c,
+            "Danger": cluster
+        })
+Training=pd.DataFrame(Training_Data)
+
+Predictions=[]
+for cluster in range(Clusters):
+    CurrentTraining=Training.loc[Training['Cluster']==cluster]
+
+    #Setting up X and y to train our linear model
+    X_train = CurrentTraining["Day"].values.reshape(-1, 1)
+    y_train = CurrentTraining["Danger"].values.reshape(-1, 1)
+
+    #Create the model
+    model = LinearRegression()
+
+    #Fit the model to the training data. 
+    model.fit(X_train, y_train)
+
+    # Use our model to predict a value
+    predicted = model.predict([[PriorDays]])
+    Predictions.append(min(max(math.ceil(predicted[0][0]),0),10))
+
+Predictions=np.array(Predictions).reshape(-1,1)
+print(Predictions)
