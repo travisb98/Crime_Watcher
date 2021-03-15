@@ -169,5 +169,11 @@ for cluster in range(Clusters):
     predicted = model.predict([[PriorDays]])
     Predictions.append(min(max(math.ceil(predicted[0][0]),0),10))
 
+
 Predictions=np.array(Predictions).reshape(-1,1)
-print(Predictions)
+PreDICT=[]
+for i,Prediction in enumerate(Predictions):
+    PreDICT.append({"Cluster":i,
+    "Danger":Prediction[0]})
+
+FinalPredictions=pd.DataFrame(PreDICT)
