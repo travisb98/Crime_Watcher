@@ -4,16 +4,16 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for, R
 # from flask_session import Session
 from flask_cors import CORS, cross_origin
 
-import socket
+import sys
 import geocoder
 import requests
 import json
+
+### crime api module we made
 import crime_api
 
-##### we shouldn't hard code this variable, we'll need to make it dynamic to detect if we're on pythonanywhere
-#### local server
-local_server = 'http://127.0.0.1:5000/'
-
+### algorithm to get danger score
+import danger_score_algorithm
 
 #create app
 app = Flask(__name__)
@@ -22,36 +22,57 @@ app = Flask(__name__)
 # SECRET_KEY = "thisRandomStringIsNeededWhenUsingFlaskSessions"
 # SESSION_TYPE = 'filesystem'
 
+
+#### if on python anywhere.......
+##### path for pythonAnywhere
+sys.path.append('/home/travisb98/mplsCrime')
+
+
+
+
 # app.config.from_object(__name__)
 # Session(app)
 CORS(app)
 
 @app.route("/")
 def home():
+    print('Server Received request for home page')
     return render_template('index.html')
 
 
 @app.route("/load", methods =['POST','GET'])
 def load():
+    print('server received request to load server')
 
-    ## after hitting the api to get crimes in the are, I should look up the danger score for each crime and add it to the crime list
+    ## if the method was post(error handling)
     if request.method == 'POST':
-        #### we'll want to fill this danger score in once it's determined
-        danger_score = 7
+        print('method was post')
+        ## using the danger_score_algorithm module to determine the danger score
+        dangerScore = int(danger_score_algorithm.dangerScore({'userLat':request.form['userLat'],'userLong':request.form['userLong']}))
+        
         ##### data we'll be sending to front end
         data = {
-            'userData':{'dangerScore':danger_score,'userLat':float(request.form['userLat']),'userLong':float(request.form['userLong'])},
+            'userData':{'dangerScore':dangerScore,'userLat':float(request.form['userLat']),'userLong':float(request.form['userLong'])},
             'crimeData':crime_api.nearbyCrimes(request.form,5)}
 
+        print('Pre JsonD data on server:')
+        print(data)
+        print('-----------------')
 
+        ### convert data to json
         json_data = json.dumps(data)
+        print('Json data sending to client')
+        print(json_data)
+        print('-----------------')
 
         # return response to server
         return Response(json_data, mimetype='application/json') 
     else:
         ### if someboy types /load in the url
-        return redirect('/')
 
+        print('somebody tried to access the load page')
+
+        return redirect('/')
 
 
 if __name__ == "__main__":

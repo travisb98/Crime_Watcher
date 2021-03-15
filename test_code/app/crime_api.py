@@ -17,6 +17,7 @@ def _annualCall(year,daysback):
 ##### this function determines how many times we'll need to hit the API, handles it accordingly, and returns cleaned data
 ##### this function will accept daysback as a parameter and return all crimes from (today - daysback) through today
 ##### the way this is written, i think the daysback interger might need to be under a certain amount
+##### main function used for algorithm call
 def callCrimeAPI(daysback):
 
     # ### define the current  date and the date x number of days in the past(iefirst_day)

@@ -95,16 +95,9 @@ safety is y, time is x
 
 safety score = if a crime happens to you now, how bad will it be
 
-grid up the city
-
-we should write up code that downloads and updates the police incidents spread sheet
-
 
 day 3
 ---
-activities to look at
-    - voices
-    - lsd
 
 
 # steps
@@ -137,5 +130,27 @@ https://www.pythonanywhere.com/
 
 - depending on the modules we'll be using, 
 - PythonAnywhere has a bunch of modules installed, which is great. However, if we're using modules that aren't included in their prepackaged environment, we'll need to create a virtual environment
+- If the machine learning code will run recurrently on the server, we should review the PythonAdv environment we set up for machine learning
 - Which modules are already included in PythonAnywhere : https://www.pythonanywhere.com/batteries_included/
 - Notes on setting up a virtual environment : https://help.pythonanywhere.com/pages/Virtualenvs
+- list of python modules we're using:
+    - FRONT END AND FLASK SERVER
+        - pandas
+        - requests
+        - json
+        - datetime
+        - flask
+        - flask_cors
+        - geocoder
+    - MACHINE LEARNING
+        - ipyleaflet
+        - geopy
+        - numpy
+        - pandas
+        - datetime
+        - requests
+        - json
+        - pickle
+        - math
+        - numpy
+        - sklearn
