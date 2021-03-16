@@ -19,7 +19,6 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
     - Scikit-Learn
     - Pandas
     - requests
-    - Time
     - Pickle
 - HTML
 - CSS
@@ -74,35 +73,14 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
 
 
 
-
-
-
-
-- ## File Overview
-  - ### index.html
-    ##### *html framework for page*
-  - ### DiscScape.ipynb
-    ##### *jupyter notebook used for scraping [DG Course Review](https://www.dgcoursereview.com/)*
-  - ### app.py
-    ##### *application for running flask server and api*
-  - ### main.js
-    ##### *handles the filters and parameters selected on the sidebar, then calls the js files for the 3 plots*
-
-- ## How to Use the Dashboard
-    1. Select the Primary Feature using the sidebar, this will determine the y-values of the scatter plot, bar chart and the choropleth maps.
-    2. Select the Secondary Feature using the sidebar, this will determine the x-values of the scatter plot.
-    3. Use the Checkboxes in the sidebar to filter out types of courses that you aren't interested in. By default all boxes are checked, meaning that no courses are filtered out. If you are a beginner and don't want to lose discs, you may want to uncheck "Show Courses With Water".
-    4. Click "Update Dashboard".
-    5. Explore the visuals.
-    6. Repeat!
-
-![Sidebar](FinalImages/Sidebar.PNG)
-
-
 - ## Conclusion
+
+ # UPDATE
     - Overall, this project is a great showcase of multiple tools and languages including Python, Javascript, CSS, and HTML. Python was used to create the server, access the database, and provide the api endpoints. HTML and CSS were used to create the general page structure and styling.Javascript was used to create the graphs and manage feature selection and filtering. The dashboard offers users the ability to search multiple course features and apply multiple filters.
     
  ![Final Dashboard](FinalImages/PageSnip.PNG)
+
+
 
 
 # **To do List !**
