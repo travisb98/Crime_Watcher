@@ -1,0 +1,168 @@
+body {
+    background-color: #1b262c;
+    padding: 0;
+    margin: 0;
+      
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+  
+body,
+html,
+.content {
+    height: 100%;
+    color: #fff;
+  }
+
+#map {
+  height: 50%;
+}
+
+.content {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Bebas Neue';
+  letter-spacing: 10px;
+  font-size: 2.75rem;
+}
+
+
+.clip {
+  position: relative;
+  margin-bottom: 60px;
+  
+
+  /* animation: fadein 2s;
+   -moz-animation: fadein 2s; /* Firefox */
+  /* -webkit-animation: fadein 2s; /* Safari and Chrome */
+  /* -o-animation: fadein 2s; Opera */
+}
+
+.clip img {
+  width: 100%;
+  display: block; /* fix gap below */;
+}
+
+.clip h1 {
+  z-index: 2;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  background: #3a3a3acc;
+  background: rgba(58, 58, 58, 0.8);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.clip:before,
+.clip:after {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 15%;
+  position: absolute;
+  bottom: -1px; /* hack to prevent rounding error bleed */
+  background-size: 100% auto;
+}
+
+.clip:before {
+  left: 0;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3Cpath fill='%231b262c' d='m0 0v2h2z' /%3E%3C/svg%3E");
+}
+
+.clip:after {
+  right: 0;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3Cpath fill='%231b262c' d='m1 0v2h-2z' /%3E%3C/svg%3E");
+}
+
+
+#wrapper{
+  height:400px;
+}
+
+svg {
+  width:100%;
+}
+
+#meter{
+  transform: rotateX(180deg);
+}
+
+circle {
+  fill: none;
+}
+
+.outline, #mask {
+  stroke: #F1F1F1;
+  /* stroke-width: 32.5; */
+}
+
+#lbl {
+  background-color: #4B4C51;
+  border-radius: 2px;
+  color: white;
+  font-family: 'courier new';
+  font-size: 15pt;
+  font-weight: bold;
+  padding: 4px 4px 2px 4px;
+  right: -46px;
+  top: 57%;
+}
+
+#gauge {
+  position: relative;
+}
+
+#meter_needle {
+  width: 69px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform-origin: bottom center;
+}
+
+@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-moz-keyframes fadein { /* Firefox */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-o-keyframes fadein { /* Opera */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
