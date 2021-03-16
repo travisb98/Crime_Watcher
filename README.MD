@@ -30,37 +30,22 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
   - Ajax
 
 
-#  Steps/game plan
-- Extract:
-    - created python file update_2021.py that downloads and updates the 2021 csv
-- Transform:
-    - blah blah
-- Load:
-    - blah blah blah
-- clean data
-- train model
-- use sentencing guidelines to create dictionary for severity of offenses https://www.revisor.mn.gov/court_rules/rule/sg-5/
-- 2 options
-    - cluster then model danger
-    - grid then model danger
-- ETL 
-    - look into API or CSV options, make it download
-    - ETL should download data for current and prior year, clean then combine data
-    - delete uneeded csv
-    - "enter number of days you want to use to predict"
-- Front End
-    - map that shows current location and recent crimes in vicinity
-    - guage that shows danger level for your location
-    - possible danger shading around border of map
+## Steps
 
-# Machine Learning Process
+-API Connection
 
+-Machine Learning
 1. Use API to collect current and past year's crime data
 2. Use these reported crimes' locations to train a clustering model
 3. Run Aggregation algorithm to develop the danger score of each cluster for each day that will be considered in the predictive model
 4. Train linear model using the danger level of the previous 14 days
 5. Predict the danger level of each cluster for the current day
 
+-Flask App
+
+-Map
+
+-Gauge
 
 # Information flow for the application
 - send user coordinates from browser to server
@@ -75,10 +60,9 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
 
 - ## Conclusion
 
- # UPDATE
-    - Overall, this project is a great showcase of multiple tools and languages including Python, Javascript, CSS, and HTML. Python was used to create the server, access the database, and provide the api endpoints. HTML and CSS were used to create the general page structure and styling.Javascript was used to create the graphs and manage feature selection and filtering. The dashboard offers users the ability to search multiple course features and apply multiple filters.
+Overall, this project is a great showcase of multiple tools and languages including machine learning, Python, Javascript, CSS, and HTML. Machine learning is used to predict the danger score for the user's location. Python was used to create the server, access the database, and provide the api endpoints. HTML and CSS were used to create the general page structure and styling. Javascript was used to create the visuals on the page.
     
- ![Final Dashboard](FinalImages/PageSnip.PNG)
+ ![Final Product](FinalImages/PageSnip.PNG)
 
 
 
