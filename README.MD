@@ -1,30 +1,17 @@
-# Minneapolis Crime Watcher
+# Minneapolis Crime Watcher Application
+![Minneapolis Skyline](FinalImages/minneapolis.jpg)
+## Overview
 
----
+This application uses machine learning to answer the question "How safe am I at this location in Minneapolis?". Access the application [here](https://travisb98.pythonanywhere.com/)
 
-# **To do List !**
-- make html and css pretty(connor)
-- decide on means of generating crime data. should the section headers be present before the data is processed, or should the section headers populate with the data being passed from the server???(connor/travis) - filler text?
-- Link to readme on page
-- reorganize files in github and delete the data we don't need since the api is implemented
-- finish gauge (Joe M) and implement into flask app
-- finish readme (Joe Kell)
-- Present with python anywhere and ask for a class mate in minneapolis to share their screen and demonstrate our app
-- make sure to upload a finalized version of the app to pythonAnywhere. Or better yet, connect pythonAnywhere account to github repository(Travis)
+By using an algorithm to convert recently reported crimes in Minneapolis to danger scores for each of the 500 sections (created with clustering), a linear regression model calculates the current danger level of the user's location. The application also displays the user's location on a map along with recently reported crimes in that area. 
 
+## Data Sources
 
+Crime data comes from [Open Minneapolis](https://opendata.minneapolismn.gov/datasets/police-incidents-2021/data?orderBy=neighborhood&orderByAsc=false) where all past police incidents are hosted. Incidents from the previous day are added at 9:30 am central time each day.
 
-# Post presentation ideas
-- goldeneye transition
-- add descriptive locations to the list of crimes with geopy or geocoder(ie nicollet and third street)
-- Places : your coordinates, stadium, downtown, campus, etc
-- most common crime near you is x
-- plot ALLL crimes, not just nearby crimes
-- color code the markers
-- geofencing minneapolis borders, just use min and max coordinates of minneapolis
-- change the name of the repository to Minneapolis_Crime_Watcher ?
-- figure out if we can move api calls to the backend to protect our keys
-- numeric identfier for markers
+Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/court_rules/rule/sg-5/).
+
 
 
 
@@ -88,9 +75,9 @@
 5. Predict the danger level of each cluster for the current day
 
 
-# Information flow
+# Information flow for the application
 - send user coordinates from browser to server
-- the server hit's the opendata api, get's recent crimes in the users area, and calculates a danger score
+- the server hits the opendata api, gets recent crimes in the users area, and calculates a danger score
 - The server returns the danger score and nearby crimes
 - Plot user's location
 - Plot nearby crimes
@@ -98,44 +85,8 @@
 
 
 
-# notes from class brain storming
-https://opendata.minneapolismn.gov/
-
-https://opendata.minneapolismn.gov/datasets/police-incidents-2021/data?orderBy=neighborhood&orderByAsc=false
 
 
-how are we going to host it? https://www.pythonanywhere.com/
-
-
-
-
-
-# Minneapolis Crime Watcher Application
-![Minneapolis Skyline](FinalImages/minneapolis.jpg)
-## Overview
-
-Have you ever been in Minneapolis and asked yourself "How safe am I here?"? This application uses machine learning to answer just that. Access the application [here](https://travisb98.pythonanywhere.com/)
-
-By using an algorithm to convert recently reported crimes in Minneapolis to danger scores for each of the 500 sections (created with clustering), a linear regression model calculates the current danger level of the user's location. The application also displays the user's location on a map along with recently reported crimes in that area. 
-
-## Data Source
-- [DG Course Review](https://www.dgcoursereview.com/) is a site that lists thousands of disc golf courses around the world. For this project, we'll be focusing on courses in the United States. Each course page lists many details including:
-    - Course Name
-    - Private or Public Status
-    - Pay to Play Course
-    - State
-    - Holes
-    - Presence of Water on a Course
-    - Presence of Water at each Hole
-    - Terrain (Lightly Wooded, Moderately Wooded, Heavily Wooded)
-    - Landscape (Mostly Flat, Moderately Hilly, Very Hilly)
-    - Rating
-    - Reviews
-    - Course Length
-    
-![Disc Golf Course Reveiw Navigation Page](FinalImages/DGCR1.PNG)
-
-![Disc Golf Course Reveiw Course Page](FinalImages/DGCR2.PNG)
 
 ## Project Steps
 1. Scrape each course page DG Course Review
@@ -190,5 +141,29 @@ By using an algorithm to convert recently reported crimes in Minneapolis to dang
     
  ![Final Dashboard](FinalImages/PageSnip.PNG)
 
+
+# **To do List !**
+- make html and css pretty(connor)
+- decide on means of generating crime data. should the section headers be present before the data is processed, or should the section headers populate with the data being passed from the server???(connor/travis) - filler text?
+- Link to readme on page
+- reorganize files in github and delete the data we don't need since the api is implemented
+- finish gauge (Joe M) and implement into flask app
+- finish readme (Joe Kell)
+- Present with python anywhere and ask for a class mate in minneapolis to share their screen and demonstrate our app
+- make sure to upload a finalized version of the app to pythonAnywhere. Or better yet, connect pythonAnywhere account to github repository(Travis)
+
+
+
+# Future Updates
+- goldeneye transition
+- add descriptive locations to the list of crimes with geopy or geocoder(ie nicollet and third street)
+- Places : your coordinates, stadium, downtown, campus, etc
+- most common crime near you is x
+- plot ALLL crimes, not just nearby crimes
+- color code the markers
+- geofencing minneapolis borders, just use min and max coordinates of minneapolis
+- change the name of the repository to Minneapolis_Crime_Watcher ?
+- figure out if we can move api calls to the backend to protect our keys
+- numeric identfier for markers
 
 
