@@ -47,7 +47,7 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
 
 -Gauge
 
-# Information flow for the application
+## Information flow for the application
 - send user coordinates from browser to server
 - the server hits the opendata api, gets recent crimes in the users area, and calculates a danger score
 - The server returns the danger score and nearby crimes
@@ -58,7 +58,7 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
 
 
 
-- ## Conclusion
+## Conclusion
 
 Overall, this project is a great showcase of multiple tools and languages including machine learning, Python, Javascript, CSS, and HTML. Machine learning is used to predict the danger score for the user's location. Python was used to create the server, access the database, and provide the api endpoints. HTML and CSS were used to create the general page structure and styling. Javascript was used to create the visuals on the page.
     
