@@ -17,38 +17,41 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f56856">
+        
         <a class="navbar-brand">Crime Watcher</a>
     </nav>
     <br>
     <br>
+    <div class="container">
     <div class="row">
+        <div class="col-lg-12">
         <p class="center">Current location crime level</p>
-    </div>
+    
         <div class="center" id="wrapper">
             <svg id="meter">
                 <circle id="outline_curves" class="circle outline" 
                 cx="50%" cy="50%"></circle>
 
                 <!-- 0-25% range green zone -->
-                <circle id="low" r="150" cx="50%" cy="50%" stroke="#00b300"
+                <circle id="low" r="150" cx="50%" cy="50%" stroke="#284FEB"
                 stroke-width="30" fill = "none" stroke-dasharray="471,943" fill="none"></circle>
 
                 <!-- 25% or more range yellow zone -->
-                <circle id="low-med" r="150" cx="50%" cy="50%" stroke="#ffff00"
+                <circle id="low2" r="150" cx="50%" cy="50%" stroke="#00b300"
                 stroke-width="30" fill = "none" stroke-dasharray="353,943" fill="none"></circle>
+
+                <!-- 25% or more range yellow zone -->
+                <circle id="low-med" r="150" cx="50%" cy="50%" stroke="#ffff00"
+                stroke-width="30" fill = "none" stroke-dasharray="259,943" fill="none"></circle>
 
                 <!-- 50% or more range orange zone -->
                 <circle id="med-high" r="150" cx="50%" cy="50%" stroke="#ffa500"
-                stroke-width="30" fill = "none" stroke-dasharray="236,943" fill="none"></circle>
+                stroke-width="30" fill = "none" stroke-dasharray="164,943" fill="none"></circle>
 
-                <!-- 75% or more range red zone -->
+                <!-- 85% or more range red zone -->
                 <circle id="high" r="150" cx="50%" cy="50%" stroke="#ff0000"
-                stroke-width="30" fill = "none" stroke-dasharray="118,943" fill="none"></circle>
-
-                <!-- Mask -->
-                <!-- <circle id="mask" r="150" cx="50%" cy="50%" stroke="#f6f6f6"
-                stroke-width="32.5" stroke-dasharray="471, 943" fill="none">
-                </circle> -->
+                stroke-width="30" fill = "none" stroke-dasharray="71,943" fill="none"></circle>
+                
                 <!-- Outline Ends (Grey) -->
                 <circle id="outline_ends" r="150" cx="50%" cy="50%" stroke="#f9f9f9"
                 stroke-width="32.5" stroke-dasharray="2, 469" fill="none"></circle>
@@ -60,6 +63,8 @@
             <label class="center" id="lbl" id="value" for="">0</label>
         </div>
     <script type="text/javascript" src="../assets/gauge.js"></script>
+</div>
+</div>
 <br>
 <br>
 <br>
