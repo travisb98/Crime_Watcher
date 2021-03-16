@@ -185,7 +185,7 @@ safety score = if a crime happens to you now, how bad will it be
 ![Minneapolis Skyline](FinalImages/minneapolis.jpg)
 ## Overview
 
-Have you ever been in Minneapolis and asked yourself "How safe am I here?"? This application uses machine learning to answer just that.
+Have you ever been in Minneapolis and asked yourself "How safe am I here?"? This application uses machine learning to answer just that. Access the application [here](https://travisb98.pythonanywhere.com/)
 
 By using an algorithm to convert recently reported crimes in Minneapolis to danger scores for each of the 500 sections (created with clustering), a linear regression model calculates the current danger level of the user's location. 
 
