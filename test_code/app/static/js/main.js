@@ -12,10 +12,13 @@ function processUserData(data,myMap){
     var userLong = data.userData.userLong;
     var dangerScore = data.userData.dangerScore;
    ///// pan to user's location
-    myMap.panTo(new L.LatLng(userLat,userLong));
+    myMap.panTo(new L.LatLng(userLat,userLong))
+
+    ///// gauge function
+    // range_change_event(dangerScore);
 
     //// zoom in to user's location
-    // myMap.setZoom(18);
+    myMap.setView([parseFloat(userLat),parseFloat(userLong)],14);
 
     ///// add marker for user data
     addMarker(myMap,userLat,userLong,'green','Your Location');
@@ -44,6 +47,7 @@ function processCrimeData(data,myMap){
             var centerLat = crime.centerLat;
             var centerLong = crime.centerLong;
             var description =crime.description;
+            var address = crime.address;
             //// add markers for crime data
             var markerText = `${description}<br>${time}<br>${date} `
             addMarker(myMap,centerLat,centerLong,'red',markerText);
@@ -52,7 +56,7 @@ function processCrimeData(data,myMap){
 
             //////// add the description time and date to the list
             $('#list').append(`<li>${description}</li>
-                                <ul><li>${time}</li><li>${date}</li><ul>`)
+                                <ul><li>${time}</li><li>${date}</li><li>${address}</li><ul>`)
         });
     };
 };

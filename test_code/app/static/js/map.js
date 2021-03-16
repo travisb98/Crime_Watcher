@@ -19,7 +19,7 @@ function colorIcon(color){
 function addMap(lat,lon,api_key){
   var myMap = L.map("map", {
     center: [lat,lon],
-    zoom: 25
+    zoom: 12
   });
   // Add background layer 
   ////// i wonder if we could make 

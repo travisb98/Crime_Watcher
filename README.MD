@@ -4,20 +4,28 @@
 
 # **To do List !**
 - make html and css pretty(connor)
-- decide on means of generating crime data. should the section headers be present before the data is processed, or should the section headers populate with the data being passed from the server???
-- make an about page/section to include on the app
-    - make layout and styling with html bootstrap css(connor)
-    - use content from readme after it's completed
-- geofencing minneapolis borders ?
+- decide on means of generating crime data. should the section headers be present before the data is processed, or should the section headers populate with the data being passed from the server???(connor/travis) - filler text?
+- Link to readme on page
 - reorganize files in github and delete the data we don't need since the api is implemented
 - finish gauge (Joe M) and implement into flask app
-- finish readme
-- add descriptive locations to the list of crimes with geopy or geocoder(ie nicollet and third street)
-- review lat, lon vs lon, lat issue in danger_score_algorithm(Joe Kell)
+- finish readme (Joe Kell)
 - Present with python anywhere and ask for a class mate in minneapolis to share their screen and demonstrate our app
 - make sure to upload a finalized version of the app to pythonAnywhere. Or better yet, connect pythonAnywhere account to github repository(Travis)
-- figure out if we can move api calls to the backend to protect our keys
+
+
+
+# Post presentation ideas
+- goldeneye transition
+- add descriptive locations to the list of crimes with geopy or geocoder(ie nicollet and third street)
+- Places : your coordinates, stadium, downtown, campus, etc
+- most common crime near you is x
+- plot ALLL crimes, not just nearby crimes
+- color code the markers
+- geofencing minneapolis borders, just use min and max coordinates of minneapolis
 - change the name of the repository to Minneapolis_Crime_Watcher ?
+- figure out if we can move api calls to the backend to protect our keys
+- numeric identfier for markers
+
 
 
 ## Overview

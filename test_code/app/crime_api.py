@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import json
 import datetime
+from geopy.geocoders import Nominatim
 
 
 def _annualCall(year,daysback):
@@ -57,13 +58,38 @@ def callCrimeAPI(daysback):
         clean_crime_list.append(clean_feature)
     return clean_crime_list
 
+# use geopy to get address
+def _locationDescription(lat,lon):
+
+    geolocator = Nominatim(user_agent="app")
+
+    location = geolocator.reverse(f'{lat}, {lon}')
+
+    print(location.address)
+
+    return location.address
+
+
+
+
+# _locationDescription(44.9778,-93.2650)
+
+
+
+
+
+
+
+
+
+
 #### pass in  the latitude, longitude and number of days back to return recent nearby crimes
 def nearbyCrimes(user_coordinates,daysback):
 
 
-    lat = float(user_coordinates['userLat'])
+    user_lat = float(user_coordinates['userLat'])
 
-    lon = float(user_coordinates['userLong'])
+    user_lon = float(user_coordinates['userLong'])
 
 
     apiresults = callCrimeAPI(daysback)
@@ -76,7 +102,15 @@ def nearbyCrimes(user_coordinates,daysback):
 
 
     for crime in apiresults:
-        if (lon-.02) < crime['centerLong'] < (lon+.02) and (lat-.02) < crime['centerLat'] < (lat+.02):
+        if (user_lon-.02) < crime['centerLong'] < (user_lon+.02) and (user_lat-.02) < crime['centerLat'] < (user_lat+.02):
+
+
+            crime['address'] = _locationDescription(crime['centerLat'],crime['centerLong'])
+            print(crime)
+
+
+
+
             nearby_crimes_list.append(crime)
     #### sort crimes by date(figure out how to sort by time)
     # nearby_crimes_list = sorted(nearby_crimes_list, key= lambda crime: (crime['date'], datetime.datetime.strptime(crime['time'],'%H:%M:%S')))
@@ -88,3 +122,7 @@ def nearbyCrimes(user_coordinates,daysback):
     # print(f'length of nearby crimes:{len(nearby_crimes_list)}')
 
     return nearby_crimes_list
+
+
+
+nearbyCrimes({'userLat':44.9778,'userLong':-93.2650},4)
