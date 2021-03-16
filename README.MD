@@ -12,35 +12,23 @@ Crime data comes from [Open Minneapolis](https://opendata.minneapolismn.gov/data
 
 Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/court_rules/rule/sg-5/).
 
+## Tools and Languages
 
-
-
-# Programs, Languages and tools
-- Python
-- Scikit-Learn
-- Javasacript
+- Python (hosted on Python Anywhere)
+    - Flask
+    - Scikit-Learn
+    - Pandas
+    - requests
+    - Time
+    - Pickle
 - HTML
 - CSS
-- Leaflet
-- mapbox
-- Python Anywhere
-- pandas
-- requests
-- datetime
-- flask
-- flask_cors
-- geocoder
-- ipyleaflet
-- geopy
-- numpy
-- json
-- pickle
-- math
-
-
-# Data Sources
-- https://opendata.minneapolismn.gov/datasets/police-incidents-2021/data?orderBy=neighborhood&orderByAsc=false
-- https://www.revisor.mn.gov/court_rules/rule/sg-5/
+  - Bootstrap
+- JavaScript
+  - D3
+  - Jquery
+  - Leaflet/Mapbox
+  - Ajax
 
 
 #  Steps/game plan
@@ -88,32 +76,7 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
 
 
 
-## Project Steps
-1. Scrape each course page DG Course Review
-2. Set-up MongoDB Atlas database
-3. Create functions to aggregate data
-4. Display aggregate data in the browser dashboard
 
-## Tools and Languages
-- MongoDB
-    - MongoDB Atlas
-    
-![Database](FinalImages/MongoDB.PNG)
-
-- Python
-    - Flask
-    - Javascript
-    - Beautiful Soup
-    - Splinter
-    - Pandas
-    - Datetime
-    - Time
-- HTML
-- CSS
-  - Bootstrap
-- JavaScript
-  - D3
-  - Plotly
 
 - ## File Overview
   - ### index.html
