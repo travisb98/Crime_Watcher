@@ -157,7 +157,12 @@ def ClusterPredict():
         "Danger":Prediction[0]})
 
     FinalPredictions=pd.DataFrame(PreDICT)
-    print(FinalPredictions)
+
+    #### save final prediction dataframe to a csv
+    FinalPredictions.to_csv('./resources/predictions.csv',index=False)
+
+
+    # print(FinalPredictions)
 
     # print(f'the danger score for cluster 5 is {FinalPredictions.Danger[5]}')
 
@@ -165,8 +170,29 @@ def ClusterPredict():
 
 
 
-# #### getting user danger value
+# # #### getting user danger value
+# #### this version runs the cluster prediction and is a bit slower
+# def dangerScore(user_coordinates):
 
+#     lat = float(user_coordinates['userLat'])
+
+#     lon = float(user_coordinates['userLong'])
+    
+#     model = pickle.load(open("./resources/clusterer.pkl", 'rb'))
+
+#     #### normally lat lon, but im pretty sure this model takes lon,lat
+#     userCluster=model.predict([[lon,lat]])[0]
+#     ### get danger score for user from prediction df
+#     dangerScore =ClusterPredict().Danger[userCluster]
+
+#     print(f'danger score is {dangerScore}')
+
+#     return dangerScore
+
+
+# #### getting user danger value
+#### this version reads the predictions from the csv to speed things up
+#### if we implement this version, we'll need to run ClusterPredict() on a schedule to update daily
 def dangerScore(user_coordinates):
 
     lat = float(user_coordinates['userLat'])
@@ -177,8 +203,12 @@ def dangerScore(user_coordinates):
 
     #### normally lat lon, but im pretty sure this model takes lon,lat
     userCluster=model.predict([[lon,lat]])[0]
-    ### get danger score for user from prediction df
-    dangerScore =ClusterPredict().Danger[userCluster]
+
+    ### read csv of predictions
+    predictions = pd.read_csv('./resources/predictions.csv')
+
+    ### look up the user's danger score using their cluster
+    dangerScore =predictions.Danger[userCluster]
 
     print(f'danger score is {dangerScore}')
 
@@ -187,6 +217,10 @@ def dangerScore(user_coordinates):
 
 
 
-#     model.predict([lat,lon]])
+
+
+
+
+
 
 

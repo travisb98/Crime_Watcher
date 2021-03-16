@@ -26,7 +26,7 @@ app = Flask(__name__)
 ##### path for pythonAnywhere
 sys.path.append('/home/travisb98/mplsCrime')
 
-
+##### instead of running ClusterPredict() every time a new person presses the button, we should use "from apscheduler.scheduler import Scheduler" to run ClusterPredict() on a daily basis
 
 
 # app.config.from_object(__name__)
@@ -54,17 +54,11 @@ def load():
             'userData':{'dangerScore':dangerScore,'userLat':float(request.form['userLat']),'userLong':float(request.form['userLong'])},
             'crimeData':crime_api.nearbyCrimes(request.form,5)}
 
-        # print('Pre JsonD data on server:')
-        # print(data)
-        # print('-----------------')
+
 
         ### convert data to json
         json_data = json.dumps(data)
-        # print('Json data sending to client')
-        # print(json_data)
-        # print('-----------------')
 
-        # return response to server
         return Response(json_data, mimetype='application/json') 
     else:
         ### if someboy types /load in the url
