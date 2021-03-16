@@ -4,9 +4,8 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for, R
 # from flask_session import Session
 from flask_cors import CORS, cross_origin
 
+import markdown
 import sys
-import geocoder
-import requests
 import json
 
 ### crime api module we made
@@ -55,15 +54,15 @@ def load():
             'userData':{'dangerScore':dangerScore,'userLat':float(request.form['userLat']),'userLong':float(request.form['userLong'])},
             'crimeData':crime_api.nearbyCrimes(request.form,5)}
 
-        print('Pre JsonD data on server:')
-        print(data)
-        print('-----------------')
+        # print('Pre JsonD data on server:')
+        # print(data)
+        # print('-----------------')
 
         ### convert data to json
         json_data = json.dumps(data)
-        print('Json data sending to client')
-        print(json_data)
-        print('-----------------')
+        # print('Json data sending to client')
+        # print(json_data)
+        # print('-----------------')
 
         # return response to server
         return Response(json_data, mimetype='application/json') 
@@ -73,6 +72,20 @@ def load():
         print('somebody tried to access the load page')
 
         return redirect('/')
+
+
+@app.route("/about")
+def about():
+    print('Server Received request for about page')
+    #### psuedo: convert markdown template to html and render it 
+    
+    ##### this converts our markdown file to html
+    with open('./templates/app_readme.md','r') as mdfile:
+        text = mdfile.read()
+        html = markdown.markdown(text)
+    return html
+
+
 
 
 if __name__ == "__main__":
