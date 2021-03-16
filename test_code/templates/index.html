@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Crime Watcher</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin="" />
+  <link rel="stylesheet" href="../assets/style.css">
+
+
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f56856">
+        
+        <a class="navbar-brand">Crime Watcher</a>
+    </nav>
+    <br>
+    <br>
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+        <p class="center">Current location crime level</p>
+    
+        <div class="center" id="wrapper">
+            <svg id="meter">
+                <circle id="outline_curves" class="circle outline" 
+                cx="50%" cy="50%"></circle>
+
+                <!-- 0-25% range green zone -->
+                <circle id="low" r="150" cx="50%" cy="50%" stroke="#284FEB"
+                stroke-width="30" fill = "none" stroke-dasharray="471,943" fill="none"></circle>
+
+                <!-- 25% or more range yellow zone -->
+                <circle id="low2" r="150" cx="50%" cy="50%" stroke="#00b300"
+                stroke-width="30" fill = "none" stroke-dasharray="353,943" fill="none"></circle>
+
+                <!-- 25% or more range yellow zone -->
+                <circle id="low-med" r="150" cx="50%" cy="50%" stroke="#ffff00"
+                stroke-width="30" fill = "none" stroke-dasharray="259,943" fill="none"></circle>
+
+                <!-- 50% or more range orange zone -->
+                <circle id="med-high" r="150" cx="50%" cy="50%" stroke="#ffa500"
+                stroke-width="30" fill = "none" stroke-dasharray="164,943" fill="none"></circle>
+
+                <!-- 85% or more range red zone -->
+                <circle id="high" r="150" cx="50%" cy="50%" stroke="#ff0000"
+                stroke-width="30" fill = "none" stroke-dasharray="71,943" fill="none"></circle>
+                
+                <!-- Outline Ends (Grey) -->
+                <circle id="outline_ends" r="150" cx="50%" cy="50%" stroke="#f9f9f9"
+                stroke-width="32.5" stroke-dasharray="2, 469" fill="none"></circle>
+
+                
+                                    
+            </svg>
+            <img  id="meter_needle" src="/images/gauge_needle.svg" alt="">
+            <label class="center" id="lbl" id="value" for="">0</label>
+        </div>
+    <script type="text/javascript" src="../assets/gauge.js"></script>
+</div>
+</div>
+<br>
+<br>
+<br>
+
+    <div class="row">
+        <p class="center">Safety of current and surrounding areas</p>
+
+    </div>
+
+
+    <div class = 'center' id='maprow' class="row">
+    <!-- The div where we will inject our map -->
+        <div class = 'center' id="map"></div>
+    </div>
+
+
+    <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <!-- API key -->
+        <script type="text/javascript" src="../assets/config.js"></script>
+    <!-- JS -->
+        <script type="text/javascript" src="../assets/map.js"></script>
+          
+</body>
+
+</html>
