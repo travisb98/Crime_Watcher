@@ -15,7 +15,7 @@ function processUserData(data,myMap){
     myMap.panTo(new L.LatLng(userLat,userLong))
 
     ///// gauge function
-    // range_change_event(dangerScore);
+    range_change_event(dangerScore);
 
     //// zoom in to user's location
     myMap.setView([parseFloat(userLat),parseFloat(userLong)],14);

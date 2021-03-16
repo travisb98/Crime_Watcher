@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
 
 
@@ -12,55 +12,68 @@
   <!-- page name from flask  -->
   <title>Minneapolis Crime Watcher</title>
   <!-- boot strap  -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- d3  -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
   <!-- jquery  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- leaflet css  -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-  crossorigin="" />
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+    <!-- font  -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <!-- css  -->
   <link rel="stylesheet" href="./static/css/style.css">
 
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f56856">
-    <a class="navbar-brand" href="#">Minneapolis Crime Watcher</a>
-  </nav>
-
-  <br>
-  <br>
-
-  <div class ='row'>
-    <button id ='button' type="button" class="btn btn-primary ">Load</button>
+  <div class="clip">
+    <h1>Minneapolis Crime Watcher</h1>
+    <img src="./static/images/minneapolis.jpg" />
   </div>
 
-  <div class="row">
-    <p class="center" id='guageLabel'>  </p>
-  </div>
+  <div class="content">
 
-  <div class= "row" id="severity_gauge">
-    <img src="https://i.stack.imgur.com/Z7Qk4.png" alt="Chart Here" class="center">
-  </div>
+    <button id='button' type="button" class="btn btn-primary ">Load</button>
 
-  <div class="row">
-    <!--  -->
-      <p class="center" id='mapLabel'></p>
-  </div>
+    <div id="gauge">
+      <svg id="meter" height="400">
+        <!-- 0-25% range white zone -->
+        <circle id="low" r="350" cx="50%" cy="5%" stroke="#ffefef" stroke-width="50" fill="none"
+          stroke-dasharray="1100,2200" fill="none"></circle>
 
-  <div class = 'center' id='maprow' class="row">
-    <!-- The div where we will inject our map -->
-      <div class = 'center' id="map"></div>
-  </div>
+        <!-- 25% or more range white red zone -->
+        <circle id="low2" r="350" cx="50%" cy="5%" stroke="#fdb6b6" stroke-width="50" fill="none"
+          stroke-dasharray="825,2200" fill="none"></circle>
 
-  <div class="row">
-    <p class="center" id = 'listLabel'></p>
-  </div>
+        <!-- 25% or more range red white zone -->
+        <circle id="low-med" r="350" cx="50%" cy="5%" stroke="#fc7c7c" stroke-width="50" fill="none"
+          stroke-dasharray="605,2200" fill="none"></circle>
 
-  <div class="row">
+        <!-- 50% or more range red red white zone -->
+        <circle id="med-high" r="350" cx="50%" cy="5%" stroke="#fb5656" stroke-width="50" fill="none"
+          stroke-dasharray="385,2200" fill="none"></circle>
+
+        <!-- 85% or more range red zone -->
+        <circle id="high" r="350" cx="50%" cy="5%" stroke="#fa0909" stroke-width="52" fill="none"
+          stroke-dasharray="165,2200" fill="none"></circle>
+      </svg>
+
+      <img id="meter_needle" src="./static/images/gauge_needle.svg" alt="">
+
+    </div>
+    <label class="center" id="lbl" id="value" for="">0</label>
+    <p class="center" id='guageLabel'> </p>
+
+    <h2>Recent Crime Incidents In Your Area</h2>
+    <p class="center" id='mapLabel'></p>
+    <div id="map"></div>
+
+    <p class="center" id='listLabel'></p>
+
     <ul class='center' id='list'>
       <!-- injecting list of lists here -->
     </ul>
@@ -70,19 +83,19 @@
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-  crossorigin=""></script>
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
 
   <!-- API key -->
   <script type="text/javascript" src="./static/js/config.js"></script>
   <!-- JS map -->
   <script type="text/javascript" src="./static/js/map.js"></script>
   <!-- JS gauge -->
-  <!-- <script type="text/javascript" src="./static/js/gauge.js"></script> -->
+  <script type="text/javascript" src="./static/js/gauge.js"></script>
 
 
- <!-- main javascript file -->
-  <script src="./static/js/main.js" type = "text/javascript"></script>
+  <!-- main javascript file -->
+  <script src="./static/js/main.js" type="text/javascript"></script>
 
 </body>
 

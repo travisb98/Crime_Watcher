@@ -28,7 +28,7 @@ function addMap(lat,lon,api_key){
     tileSize: 512,
     maxZoom:18,
     zoomOffset: -1,
-    id: "mapbox/streets-v11",
+    id: "mapbox/dark-v9",
     accessToken: api_key
   }).addTo(myMap);
 
