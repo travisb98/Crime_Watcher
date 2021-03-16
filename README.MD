@@ -28,10 +28,6 @@
 
 
 
-## Overview
-For this project, we'll use data on police incidents in minneapolis to build a machine learning model that determines a safety score based on a user's location and other demographics. The application will display the users location on a map with other crime related data. 
-
-
 # Programs, Languages and tools
 - Python
 - Scikit-Learn
@@ -83,14 +79,13 @@ For this project, we'll use data on police incidents in minneapolis to build a m
     - guage that shows danger level for your location
     - possible danger shading around border of map
 
-# joes step list
+# Machine Learning Process
 
-1. Download all data using API or csv's
-2. Clean and filter data and delete csv's if they exist storing data in ram 
-3. run clustering model to determine which cluster each point is in or optionally train a new clustering model
-4. Run Aggregation algorithm creating new data set and deleting old
-5. train model using up to date data
-6. predict current time period and return value
+1. Use API to collect current and past year's crime data
+2. Use these reported crimes' locations to train a clustering model
+3. Run Aggregation algorithm to develop the danger score of each cluster for each day that will be considered in the predictive model
+4. Train linear model using the danger level of the previous 14 days
+5. Predict the danger level of each cluster for the current day
 
 
 # Information flow
@@ -101,30 +96,6 @@ For this project, we'll use data on police incidents in minneapolis to build a m
 - Plot nearby crimes
 - Display nearby crimes in a list
 
-# notes on python anywhere
-
-https://www.pythonanywhere.com/
-
-- Python anywhere is a easy and free to use site that allows you to deploy python website super easily
-- The free version allows 1 site at a time with a non-custom url  
-- PythonAnywhere has a bunch of modules installed, which is great. However, if we're using modules that aren't included in their prepackaged environment, we'll need to create a virtual environment
-- If the machine learning code will run recurrently on the server, we should review the PythonAdv environment we set up for machine learning
-- Which modules are already included in PythonAnywhere : https://www.pythonanywhere.com/batteries_included/
-- Notes on setting up a virtual environment : https://help.pythonanywhere.com/pages/Virtualenvs
-- Since many of the modules we used were not included with PythonAnywhere's prepackaged environment. We had to make a virtual environment, which was actually very easy.
-- PythonAnywhere's Guide to deploying a web app:
- ![Step 1](./images/deploying_a_web_app/Capture1.JPG "Step 1")
- ![Step 2](./images/deploying_a_web_app/Capture2.JPG "Step 2")
- ![Step 3](./images/deploying_a_web_app/Capture3.JPG "Step 3")
- ![Step 4](./images/deploying_a_web_app/Capture4.JPG "Step 4")
- ![Step 5](./images/deploying_a_web_app/Capture5.JPG "Step 5")
- ![Step 6](./images/deploying_a_web_app/Capture6.JPG "Step 6")
- ![Step 7](./images/deploying_a_web_app/Capture7.JPG "Step 7")
-
-
-# Location Test
-![Step 7](./images/fulton_location_test.JPG "Location test")
-
 
 
 # notes from class brain storming
@@ -133,50 +104,8 @@ https://opendata.minneapolismn.gov/
 https://opendata.minneapolismn.gov/datasets/police-incidents-2021/data?orderBy=neighborhood&orderByAsc=false
 
 
-similar project:
-
-https://towardsdatascience.com/demand-forecast-boston-crime-data-64a0cff54820
-
-
-How safe are you in minneapolis based on location
-
-machine learn to classify how safe we are
-
-geofencing, extra feature
-
-safety score
-
-2 models, one for if you want to include your race or not
-
-numerical
-
-everything is quantified, murder is 10, rape is 9, etc
-
-have a feature that does retraining
-
-would we want to make a web based version or a browser based
-
 how are we going to host it? https://www.pythonanywhere.com/
 
-use rate limiter for number
-
-have users enter their own API key
-
-star out api key when user enters it into text field
-
-use this for making the map https://plotly.com/javascript/scattermapbox/
-
-how would the events of 2020 affect our dataset?
-
-where are we starting and ending our data time wise ?
-
-should we use tableau to do a preliminary analysis on the data?
-
-how many clusters is to many clusters?
-
-safety is y, time is x
-
-safety score = if a crime happens to you now, how bad will it be
 
 
 
@@ -187,7 +116,7 @@ safety score = if a crime happens to you now, how bad will it be
 
 Have you ever been in Minneapolis and asked yourself "How safe am I here?"? This application uses machine learning to answer just that. Access the application [here](https://travisb98.pythonanywhere.com/)
 
-By using an algorithm to convert recently reported crimes in Minneapolis to danger scores for each of the 500 sections (created with clustering), a linear regression model calculates the current danger level of the user's location. 
+By using an algorithm to convert recently reported crimes in Minneapolis to danger scores for each of the 500 sections (created with clustering), a linear regression model calculates the current danger level of the user's location. The application also displays the user's location on a map along with recently reported crimes in that area. 
 
 ## Data Source
 - [DG Course Review](https://www.dgcoursereview.com/) is a site that lists thousands of disc golf courses around the world. For this project, we'll be focusing on courses in the United States. Each course page lists many details including:
