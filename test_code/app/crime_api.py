@@ -65,7 +65,7 @@ def _locationDescription(lat,lon):
 
     location = geolocator.reverse(f'{lat}, {lon}')
 
-    print(location.address)
+    # print(location.address)
 
     return location.address
 
@@ -106,7 +106,7 @@ def nearbyCrimes(user_coordinates,daysback):
 
 
             crime['address'] = _locationDescription(crime['centerLat'],crime['centerLong'])
-            print(crime)
+            # print(crime)
 
 
 
@@ -125,4 +125,4 @@ def nearbyCrimes(user_coordinates,daysback):
 
 
 
-nearbyCrimes({'userLat':44.9778,'userLong':-93.2650},4)
+# nearbyCrimes({'userLat':44.9778,'userLong':-93.2650},4)
