@@ -182,7 +182,7 @@ safety score = if a crime happens to you now, how bad will it be
 
 
 # Minneapolis Crime Watcher Application
-![Golf Basket and Bag](FinalImages/HeaderImage.jpg)
+![Minneapolis Skyline](FinalImages/minneapolis.jpg)
 ## Overview
 
 Have you ever been in Minneapolis and asked yourself "How safe am I here?"? This application uses machine learning to answer just that.
