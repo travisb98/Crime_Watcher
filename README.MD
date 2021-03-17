@@ -18,7 +18,7 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
     - Flask
     - Scikit-Learn
     - Pandas
-    - requests
+    - Requests
     - Pickle
 - HTML
 - CSS
