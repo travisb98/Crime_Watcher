@@ -32,22 +32,22 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
 
 ## Steps
 
--API Connection
+### API Connection
 
--Machine Learning
+### Machine Learning
 1. Use API to collect current and past year's crime data
 2. Use these reported crimes' locations to train a clustering model
 3. Run Aggregation algorithm to develop the danger score of each cluster for each day that will be considered in the predictive model
 4. Train linear model using the danger level of the previous 14 days
 5. Predict the danger level of each cluster for the current day
 
--Flask App
+### Flask App
 
--Map
+### Map
 
--Gauge
+### Gauge
 
-## Information flow for the application
+### Information flow for the application
 - send user coordinates from browser to server
 - the server hits the opendata api, gets recent crimes in the users area, and calculates a danger score
 - The server returns the danger score and nearby crimes
