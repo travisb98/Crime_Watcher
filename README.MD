@@ -8,7 +8,7 @@ By using an algorithm to convert recently reported crimes in Minneapolis to dang
 
 ## Data Sources
 
-Crime data comes from [Open Minneapolis](https://opendata.minneapolismn.gov/datasets/police-incidents-2021/data?orderBy=neighborhood&orderByAsc=false) where all past police incidents are hosted. Incidents from the previous day are added at 9:30 am central time each day.
+Crime data comes from [Open Data Minneapolis](https://opendata.minneapolismn.gov/datasets/police-incidents-2021/data?orderBy=neighborhood&orderByAsc=false) where all past police incidents are hosted. Incidents from the previous day are added at 9:30 am central time each day.
 
 Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/court_rules/rule/sg-5/).
 
