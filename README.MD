@@ -66,4 +66,4 @@ The gauge and needle are based off of Preethi Ranjit's tutorial on [Creating an 
 
 Overall, this project is a great showcase of multiple tools and languages including machine learning, Python, Javascript, CSS, and HTML. Machine learning is used to predict the danger score for the user's location. Python was used to create the server, access the database, and provide the api endpoints. HTML and CSS were used to create the general page structure and styling. Javascript was used to create the visuals on the page.
     
- ![Final Product](FinalImages/PageSnip.PNG)
+ ![Final Product](FinalImages/PageSnip.png)
