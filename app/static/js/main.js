@@ -77,6 +77,7 @@ function processCrimeData(data, myMap) {
     };
 
     $("#loading").hide()
+    $("#map").css("z-index", "");
 };
 
 ///// function to handle errors when posting data to server
@@ -128,6 +129,7 @@ function locationSucess(position) {
     // /// if you're testing this code outside of minneapolis, you can uncomment this block to use dummy coordinates in downtown minneapolis
     // var user_coordinates = { 'userLat': 44.9778, 'userLong': -93.2650 };
 
+    $("#map").css("z-index", "-1");
     $("#loading").show()
     ///// posts the coordinates to the server
     postToFlask(user_coordinates);
