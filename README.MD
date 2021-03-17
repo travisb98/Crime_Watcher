@@ -46,6 +46,7 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
 ### Map
 
 ### Gauge
+The gauge and needle are based off of Preethi Ranjit's tutorial on [Creating an SVG Gauge Meter Animation](https://www.hongkiat.com/blog/svg-meter-gauge-tutorial/). We modified the code from the tutorial to add our own scale, colors, and size. When a danger score is returned from the server, it will be both reflected on the gauge and displayed underneath it.
 
 ### Information flow for the application
 - send user coordinates from browser to server
