@@ -30,9 +30,9 @@ Crime severities come from [the Minnesota Courts](https://www.revisor.mn.gov/cou
   - Ajax
 
 
-## Steps
+## Application Elements
 
-# API Connection
+### API Connection
 We used the API from [OpenDataMinneapolis](https://opendata.minneapolismn.gov/datasets/police-incidents-2021) .
 Since each year had its own api string, we developed the code to make multiple API hits, once for each year of requested data. We also used queries within the url to request data within the last x number of days, which allowed us to toggle the amount of data coming back from the API. We then used geopy to get a descriptive location of the crime by inputting the crime's coordinates. All of this functionality was built into functions within the crime_api.py file. The functions were then implemented into the flask server in the app.py file.
 
@@ -43,23 +43,22 @@ Since each year had its own api string, we developed the code to make multiple A
 4. Train linear model using the danger level of the previous 14 days
 5. Predict the danger level of each cluster for the current day
 
-# Flask App
+### Flask App
 The Flask app is contained in the app.py file. The flask server contains 2 main routes. The home page that is loaded when the user initially visits the website and the load route which receives and returns data to and from the front-end javascript.
 
-# Map
+### Map
 We used javascript leafly to map the user's location and locations of crimes in the user's area. To distinguish the user's maker from the crime markers, we made the user's marker green and the crime markers red. The crime markers have pop-ups that contain details related to the crime including date, time, and type of offense.
 
 ### Gauge
 The gauge and needle are based off of Preethi Ranjit's tutorial on [Creating an SVG Gauge Meter Animation](https://www.hongkiat.com/blog/svg-meter-gauge-tutorial/). We modified the code from the tutorial to add our own scale, colors, and size. When a danger score is returned from the server, it will be both reflected on the gauge and displayed underneath it.
 
-### Information flow for the application
-- send user coordinates from browser to server
-- the server hits the opendata api, gets recent crimes in the users area, and calculates a danger score
-- The server returns the danger score and nearby crimes
-- Plot user's location
-- Plot nearby crimes
-- Display nearby crimes in a list
-
+### Data Flow
+- Send user coordinates from browser to server
+- The server hits the Open Data Minneapolis API, gets recent crimes in the users area, and calculates a danger score
+- The server returns the danger score and nearby crimes to the client
+- The gauge is updated with the calculated danger score
+- The nearby crimes and the user's location get plotted on the map
+- Nearby crimes are also displayed in a table
 
 
 
@@ -68,32 +67,3 @@ The gauge and needle are based off of Preethi Ranjit's tutorial on [Creating an 
 Overall, this project is a great showcase of multiple tools and languages including machine learning, Python, Javascript, CSS, and HTML. Machine learning is used to predict the danger score for the user's location. Python was used to create the server, access the database, and provide the api endpoints. HTML and CSS were used to create the general page structure and styling. Javascript was used to create the visuals on the page.
     
  ![Final Product](FinalImages/PageSnip.PNG)
-
-
-
-
-# **To do List !**
-- make html and css pretty(connor)
-- decide on means of generating crime data. should the section headers be present before the data is processed, or should the section headers populate with the data being passed from the server???(connor/travis) - filler text?
-- Link to readme on page
-- reorganize files in github and delete the data we don't need since the api is implemented
-- finish gauge (Joe M) and implement into flask app
-- finish readme (Joe Kell)
-- Present with python anywhere and ask for a class mate in minneapolis to share their screen and demonstrate our app
-- make sure to upload a finalized version of the app to pythonAnywhere. Or better yet, connect pythonAnywhere account to github repository(Travis)
-
-
-
-# Future Updates
-- goldeneye transition
-- add descriptive locations to the list of crimes with geopy or geocoder(ie nicollet and third street)
-- Places : your coordinates, stadium, downtown, campus, etc
-- most common crime near you is x
-- plot ALLL crimes, not just nearby crimes
-- color code the markers
-- geofencing minneapolis borders, just use min and max coordinates of minneapolis
-- change the name of the repository to Minneapolis_Crime_Watcher ?
-- figure out if we can move api calls to the backend to protect our keys
-- numeric identfier for markers
-
-
