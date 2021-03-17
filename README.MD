@@ -53,12 +53,12 @@ We used javascript leafly to map the user's location and locations of crimes in 
 The gauge and needle are based off of Preethi Ranjit's tutorial on [Creating an SVG Gauge Meter Animation](https://www.hongkiat.com/blog/svg-meter-gauge-tutorial/). We modified the code from the tutorial to add our own scale, colors, and size. When a danger score is returned from the server, it will be both reflected on the gauge and displayed underneath it.
 
 ### Data Flow
-- Send user coordinates from browser to server
-- The server hits the Open Data Minneapolis API, gets recent crimes in the users area, and calculates a danger score
-- The server returns the danger score and nearby crimes to the client
-- The gauge is updated with the calculated danger score
-- The nearby crimes and the user's location get plotted on the map
-- Nearby crimes are also displayed in a table
+1. Send user coordinates from browser to server
+2. The server hits the Open Data Minneapolis API, gets recent crimes in the users area, and calculates a danger score
+3. The server returns the danger score and nearby crimes to the client
+4. The gauge is updated with the calculated danger score
+5. The nearby crimes and the user's location get plotted on the map
+6. Nearby crimes are also displayed in a table
 
 
 
