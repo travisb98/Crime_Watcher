@@ -5,12 +5,15 @@ body {
       
 }
 
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-  }
+.btn {
+  font-family: 'Bebas Neue';
+  letter-spacing: 5px;
+  font-size: 2.5rem;
+}
+
+.row {
+  margin-bottom: 3.5rem;
+}
 
   
 body,
@@ -104,25 +107,19 @@ circle {
   fill: none;
 }
 
-.outline, #mask {
-  stroke: #F1F1F1;
-  /* stroke-width: 32.5; */
-}
-
-#lbl {
-  background-color: #4B4C51;
-  border-radius: 2px;
-  color: white;
-  font-family: 'courier new';
-  font-size: 15pt;
-  font-weight: bold;
-  padding: 4px 4px 2px 4px;
-  right: -46px;
-  top: 57%;
-}
-
 #gauge {
   position: relative;
+  margin-bottom: 3.5rem;
+}
+
+p {
+  font-size: 3rem;
+  font-family: 'Bebas Neue';
+  letter-spacing: 2px;
+}
+
+#listLabel {
+  font-size: 2.5rem;
 }
 
 #meter_needle {
@@ -132,37 +129,55 @@ circle {
   right: 0;
   margin: auto;
   transform-origin: bottom center;
+  transform: rotate(270deg);
 }
 
-@keyframes fadein {
-  from {
-      opacity:0;
-  }
-  to {
-      opacity:1;
-  }
+table, .dataTables_wrapper {
+  background-color: #fff;
 }
-@-moz-keyframes fadein { /* Firefox */
-  from {
-      opacity:0;
-  }
-  to {
-      opacity:1;
-  }
+
+.dataTables_wrapper {
+  padding-top: 10px;
 }
-@-webkit-keyframes fadein { /* Safari and Chrome */
-  from {
-      opacity:0;
-  }
-  to {
-      opacity:1;
-  }
+
+
+#loading {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: none;
+  opacity: 0.7;
+  background-color: #585858;
+  z-index: 99;
+  text-align: center;
 }
-@-o-keyframes fadein { /* Opera */
-  from {
-      opacity:0;
-  }
-  to {
-      opacity: 1;
-  }
+
+.loader {
+  border: 30px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 30px solid #fb5656;
+  border-bottom: 30px solid #fb5656;
+  width: 500px;
+  height: 500px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 100;
+  top: 30%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

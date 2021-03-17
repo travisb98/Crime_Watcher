@@ -6,9 +6,6 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
 
-
-
-
   <!-- page name from flask  -->
   <title>Minneapolis Crime Watcher</title>
   <!-- boot strap  -->
@@ -22,14 +19,20 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin="" />
-    <!-- font  -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- font  -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <!-- css  -->
   <link rel="stylesheet" href="./static/css/style.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
 </head>
 
 <body>
+
+  <div id="loading">
+    <div class="loader"></div>
+  </div>
+
   <div class="clip">
     <h1>Minneapolis Crime Watcher</h1>
     <img src="./static/images/minneapolis.jpg" />
@@ -37,7 +40,10 @@
 
   <div class="content">
 
-    <button id='button' type="button" class="btn btn-primary ">Load</button>
+    <div class="d-flex justify-content-center row">
+      <button id='button' type="button" class="btn btn-danger">Tap Here To Determine Your Current Danger Score</button>
+    </div>
+
 
     <div id="gauge">
       <svg id="meter" height="400">
@@ -65,22 +71,35 @@
       <img id="meter_needle" src="./static/images/gauge_needle.svg" alt="">
 
     </div>
-    <label class="center" id="lbl" id="value" for="">0</label>
-    <p class="center" id='guageLabel'> </p>
+    <!-- <label class="center" id="lbl" id="value" for="">0</label> -->
+
+    <div class="d-flex justify-content-center row">
+      <p id='gaugeLabel'> </p>
+    </div>
+
 
     <h2>Recent Crime Incidents In Your Area</h2>
-    <p class="center" id='mapLabel'></p>
-    <div id="map"></div>
+    <!-- <p class="center" id='mapLabel'></p> -->
+    <div id="map" style="z-index: -1;"></div>
 
-    <p class="center" id='listLabel'></p>
+    <div class="d-flex justify-content-center row">
+      <p id='listLabel'></p>
+    </div>
 
-    <ul class='center' id='list'>
-      <!-- injecting list of lists here -->
+
+    
+    <table class="table display">
+    </table>
+
+
+    <!-- <ul class='center' id='list'> -->
+    <!-- injecting list of lists here -->
     </ul>
   </div>
 
 
 
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="

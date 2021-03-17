@@ -5,7 +5,6 @@ function range_change_event(danger_score) {
 
     meter_needle.style.transform = "rotate(" + 
         (270 + ((percent * 180) / 100)) + "deg)";
-    lbl.textContent = (danger_score);
 }
 
 // range_change_event(9);
