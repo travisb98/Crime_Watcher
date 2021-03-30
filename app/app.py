@@ -1,5 +1,4 @@
 # This code is currently being ran from the "app" folder
-
 from flask import Flask, render_template, jsonify, request, redirect, url_for, Response
 # from flask_session import Session
 from flask_cors import CORS, cross_origin
@@ -19,17 +18,6 @@ app = Flask(__name__)
 # SECRET_KEY = "thisRandomStringIsNeededWhenUsingFlaskSessions"
 # SESSION_TYPE = 'filesystem'
 
-#Locations will be for dropdown
-# {
-#     "Minnehaha Falls": {"lat": 44.9153307, "long": -93.2110006},
-#     "First Avenue": {"lat": 44.9785315, "long": -93.2759978},
-#     "Stone Arch Bridge": {"lat": 44.9809433, "long": -93.2534122},
-#     "Minneapolis Institute of Art": {"lat": 44.9586219, "long": -93.2741806},
-#     "U.S. Bank Stadium": {"lat": 44.976614, "long": -93.2670266},
-#     "Lake Harriet": {"lat": 44.9220232, "long": -93.3097262},
-#     "Target Field": {"lat": 44.9823467, "long": -93.2796528}
-# }
-
 # Path for PythonAnywhere
 sys.path.append('/home/travisb98/mplsCrime')
 
@@ -42,8 +30,18 @@ CORS(app)
 
 @app.route("/")
 def home():
-    print('Server Received request for home page')
-    return render_template('index.html')
+    #Locations will be for dropdown
+    locations={
+        "My Location":{"lat": 0, "long": 0},
+        "First Avenue": {"lat": 44.9785315, "long": -93.2759978},
+        "Lake Harriet": {"lat": 44.9220232, "long": -93.3097262},
+        "Minneapolis Institute of Art": {"lat": 44.9586219, "long": -93.2741806},
+        "Minnehaha Falls": {"lat": 44.9153307, "long": -93.2110006},
+        "Stone Arch Bridge": {"lat": 44.9809433, "long": -93.2534122},
+        "Target Field": {"lat": 44.9823467, "long": -93.2796528},
+        "U.S. Bank Stadium": {"lat": 44.976614, "long": -93.2670266}
+    }
+    return render_template("index.html", locations=locations)
 
 
 @app.route("/load", methods =['POST','GET'])
