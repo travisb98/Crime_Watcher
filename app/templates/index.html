@@ -49,7 +49,7 @@
       <label class="group-title">Select a location</label>
       <select id="SelectedLocation" class="custom-select custom-select-sm">
           {% for key, value in locations.items() %}
-              <option value="{{ [value.lat,value.long] }}" id="{{ [value.lat,value.long] }}">{{ key }}</option>
+              <option value="{{ [value.lat,value.long] }}" id="{{ key }}">{{ key }}</option>
           {% endfor %}
       </select>
     </div>

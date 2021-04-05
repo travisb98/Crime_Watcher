@@ -145,17 +145,43 @@ function errorHandler(err) {
     }
 };
 
+///// fucntion that is ran when using the dropdown options
+function locationDropdown(lat,long) {
+    console.log(lat,long)
+    var user_coordinates = { 'userLat': lat, 'userLong': long };
+    // var user_coordinates = { 'userLat': 44.9778, 'userLong': -93.2650 };
+    $("#map").css("z-index", "-1");
+    $("#loading").show()
+    ///// posts the coordinates to the server
+    postToFlask(user_coordinates);
+
+};
+
 /////  function that will be passed to event handler
 function clickFunc() {
 
-    ///// if the geolocation is true
-    if (navigator.geolocation) {
-        var options = { timeout: 60000, enableHighAccuracy: true };
-        navigator.geolocation.getCurrentPosition(locationSucess, errorHandler, options);
+    var dropDown = document.getElementById("SelectedLocation");
+    var dropDownText = dropDown.options[dropDown.selectedIndex].text;
+
+    if (dropDownText == "My Location") {
+        ///// if the geolocation is true
+        if (navigator.geolocation) {
+            var options = { timeout: 60000, enableHighAccuracy: true };
+            navigator.geolocation.getCurrentPosition(locationSucess, errorHandler, options);
+        }
+        else {
+            alert('Geolocation is not supported by this browser.')
+        };
     }
     else {
-        alert('Geolocation is not supported by this browser.')
+        var latlongStr=dropDown.value.slice(1,length-1).split(",");
+        var lat= parseFloat(latlongStr[0]);
+        var long= parseFloat(latlongStr[1].trim());
+        console.log(dropDown.value);
+        console.log(lat,long);
+        locationDropdown(lat,long);
     };
+
 
 };
 
