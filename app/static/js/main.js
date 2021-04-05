@@ -33,16 +33,16 @@ function processCrimeData(data, myMap) {
 
     var dataSet = [];
 
-    //// if the api returns 0 results for nearby crimes
+    // if the api returns 0 results for nearby crimes
     if (data.crimeData === undefined || data.crimeData.length == 0) {
 
         //// label list
         $('#listLabel').html('Congratulations, there are no recent crimes in your area.');
 
     }
-    /// if any crimes were return from the api .... 
+    // if any crimes were returned from the api .... 
     else {
-        ////// for each of the crimes in the list of crimes
+        // for each of the crimes in the list of crimes
         data.crimeData.forEach(function (crime) {
             var date = crime.date;
             var time = crime.time;
@@ -50,13 +50,13 @@ function processCrimeData(data, myMap) {
             var centerLong = crime.centerLong;
             var description = crime.description;
             var address = crime.address;
-            //// add markers for crime data
+            // add markers for crime data
             var markerText = `${description}<br>${time}<br>${date} `
             addMarker(myMap, centerLat, centerLong, 'red', markerText);
-            //// label list
+            // label list
             // $('#listLabel').html('Crimes in your area:')
 
-            //////// add the description time and date to the list
+            // add the description time and date to the list
             // $('#list').append(`<li>${description}</li>
             // <ul><li>${time}</li><li>${date}</li><li>${address}</li><ul>`)
 
@@ -80,7 +80,7 @@ function processCrimeData(data, myMap) {
     $("#map").css("z-index", "");
 };
 
-///// function to handle errors when posting data to server
+// function to handle errors when posting data to server
 function postErrorHandler(xhr, status, error) {
     console.log('error when posting to server')
     console.log(`POST Error: ${error}`);
@@ -89,12 +89,12 @@ function postErrorHandler(xhr, status, error) {
     alert(`POST Error ${error}`)
 }
 
-//// function that sends latitude and longitude to server in this format {'userlat':latitude, 'userlon':longitude}
+// function that sends latitude and longitude to server in this format {'userlat':latitude, 'userlon':longitude}
 function postToFlask(data) {
     console.log('the data that will be sent to flask is:')
     console.log(data);
 
-    ///get the base path and the loading route
+    //get the base path and the loading route
     var server_path = window.location.href;
     var post_path = 'load';
     var url = server_path + post_path;
@@ -105,7 +105,7 @@ function postToFlask(data) {
         data: data,
         dataType: 'json'
     }).fail(function (xhr, status, error) {
-        //// function to handle errors with posting
+        // function to handle errors with posting
         postErrorHandler(xhr, status, error);
     }).done(function (data) {
         console.log('response data received from server:');
@@ -119,24 +119,20 @@ function postToFlask(data) {
 };
 
 
-///// fucntion that is ran when the getCurrentPosition function is sucessful
+// fucntion that is ran when the getCurrentPosition function is sucessful
 function locationSucess(position) {
 
-    //// getting coordinates from the postition
+    // getting coordinates from the postition
     var user_coordinates = {'userLat':position.coords.latitude, 'userLong':position.coords.longitude};
-
-    // //// !!!!!NOTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // /// if you're testing this code outside of minneapolis, you can uncomment this block to use dummy coordinates in downtown minneapolis
-    // var user_coordinates = { 'userLat': 44.9778, 'userLong': -93.2650 };
 
     $("#map").css("z-index", "-1");
     $("#loading").show()
-    ///// posts the coordinates to the server
+    // posts the coordinates to the server
     postToFlask(user_coordinates);
 
 };
 
-/// error handler that is ran when getCurrentPosition is NOT sucessful
+// error handler that is ran when getCurrentPosition is NOT sucessful
 function errorHandler(err) {
     if (err.code == 1) {
         alert("Error: Access is denied!");
@@ -147,9 +143,8 @@ function errorHandler(err) {
 
 ///// fucntion that is ran when using the dropdown options
 function locationDropdown(lat,long) {
-    console.log(lat,long)
     var user_coordinates = { 'userLat': lat, 'userLong': long };
-    // var user_coordinates = { 'userLat': 44.9778, 'userLong': -93.2650 };
+
     $("#map").css("z-index", "-1");
     $("#loading").show()
     ///// posts the coordinates to the server
@@ -157,14 +152,14 @@ function locationDropdown(lat,long) {
 
 };
 
-/////  function that will be passed to event handler
+//  function that will be passed to event handler
 function clickFunc() {
 
     var dropDown = document.getElementById("SelectedLocation");
     var dropDownText = dropDown.options[dropDown.selectedIndex].text;
 
     if (dropDownText == "My Location") {
-        ///// if the geolocation is true
+        // This handler is making sure that we have access to the user's geolocation when they select "My Location"
         if (navigator.geolocation) {
             var options = { timeout: 60000, enableHighAccuracy: true };
             navigator.geolocation.getCurrentPosition(locationSucess, errorHandler, options);
@@ -174,11 +169,10 @@ function clickFunc() {
         };
     }
     else {
+        // This uses the coordinates for the selected dropdown location
         var latlongStr=dropDown.value.slice(1,length-1).split(",");
         var lat= parseFloat(latlongStr[0]);
         var long= parseFloat(latlongStr[1].trim());
-        console.log(dropDown.value);
-        console.log(lat,long);
         locationDropdown(lat,long);
     };
 
