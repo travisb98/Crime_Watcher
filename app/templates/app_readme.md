@@ -1,37 +1,22 @@
 
-# page rendered from markdown
+# Minneapolis Crime Watcher Application
+
+This application uses machine learning to answer the question "How safe am I at this location in Minneapolis?". Access the application [here](https://travisb98.pythonanywhere.com/)
+
+By using an algorithm to convert recently reported crimes in Minneapolis to danger scores for each of the 500 sections (created with clustering), a linear regression model calculates the current danger level of the user's location. The application also displays the user's location on a map along with recently reported crimes in that area. 
 
 
-
-# Post presentation ideas
-- goldeneye transition
-- give user's the ability to select certain locations, including their own, and load crime reports in that area (use draggable pin, extract coordinates from pins new location) your coordinates, stadium, downtown, campus, etc
-- most common crime near you is x
-- plot ALLL crimes, not just nearby crimes
-- color code the markers based on crime type of vicinity of crime
-- Use min and max coordinates to to set a boundry around minneapolis
-- change the name of the repository to Minneapolis_Crime_Watcher ?
-- figure out if we can move api calls to the backend to protect our keys
-- numeric identfier for markers
-- relative danger score (ie your area is the 3rd most dangerous area in minneapolis)
-- make most recent crimes how up on top
-- get rid of d3 and just use jquery
-- cross browser compatability
-- figure out how we can make it an actual downloadable app. maybe we can make it work offline by loading it with a bunch of data and use it instead of the api when the app is offline.....?
-- If users want, they can enter their address and phone number to receive text message notifications of crimes in their area
-- feed day of the week and hourly data to the machine learning algorithm to find hourly and daily patterns
-- a slider that selects the number of days back
-- make needle flat on initial page load
+For more information on the project, check out our [github page](https://github.com/travisb98/Crime_Watcher)
 
 
-# **To do List !**
-- change position of button
-- Link to readme on page
-- reorganize files in github and delete the data we don't need since the api is implemented
-- finish readme (Joe Kell)
-- delete pins if they already exist to avoid duplicate pins(Travis)
-- Present with python anywhere and ask for a class mate in minneapolis to share their screen and demonstrate our app
-- make sure to upload a finalized version of the app to pythonAnywhere. Or better yet, connect pythonAnywhere account to github repository(Travis)
-- review and edit code comments/layout
-- finish about section
-- implement scheduled execution of ClusterPredict() to update daily
+# API Connection
+We used the API from [OpenDataMinneapolis](https://opendata.minneapolismn.gov/datasets/police-incidents-2021)
+Since each year had its own api string, we developed the code to make multiple API hits, once for each year of requested data. We also used queries within the url to request data within the last x number of days, which allowed us to toggle the amount of data coming back from the API. We then used geopy to get a descriptive location of the crime by inputting the crime's coordinates. All of this functionality was built into functions within the crime_api.py file. The functions were then implemented into the flask server in the app.py file.
+
+
+# Flask App
+The Flask app is contained in the app.py file. The flask server contains 2 main routes. The home page that is loaded when the user initially visits the website and the load route which receives and returns data to and from the front-end javascript.
+
+# Map
+We used javascript leafly to map the user's location and locations of crimes in the user's area. To distinguish the user's maker from the crime markers, we made the user's marker green and the crime markers red. The crime markers have pop-ups that contain details related to the crime including date, time, and type of offense.
+

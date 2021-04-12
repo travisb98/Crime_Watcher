@@ -1,5 +1,11 @@
 # This code is currently being ran from the "app" folder
-from flask import Flask, render_template, jsonify, request, redirect, url_for, Response
+# from flask import Flask, render_template, jsonify, request, redirect, url_for, Response
+
+
+from flask import Flask, render_template, jsonify, request, redirect, url_for, Response, g, abort, flash
+
+
+
 # from flask_session import Session
 from flask_cors import CORS, cross_origin
 import markdown
@@ -10,13 +16,30 @@ import crime_api
 # algorithm to get danger score
 import danger_score_algorithm
 
+#import the the api key from the config.py file
+from config import api_key
+
+
 #create app
 app = Flask(__name__)
 
+# no longer using session data????
 # Secret key that is needed for session
 # app.secret_key ='thisRandomStringIsNeededWhenUsingFlaskSessions'
 # SECRET_KEY = "thisRandomStringIsNeededWhenUsingFlaskSessions"
 # SESSION_TYPE = 'filesystem'
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Path for PythonAnywhere
 sys.path.append('/home/travisb98/mplsCrime')
@@ -24,6 +47,8 @@ sys.path.append('/home/travisb98/mplsCrime')
 # instead of running ClusterPredict() every time a new person presses the button, we should use "from apscheduler.scheduler import Scheduler" to run ClusterPredict() on a daily basis
 #WIP^
 
+
+# this is for using session data?
 # app.config.from_object(__name__)
 # Session(app)
 CORS(app)
@@ -41,6 +66,14 @@ def home():
         "Target Field": {"lat": 44.9823467, "long": -93.2796528},
         "U.S. Bank Stadium": {"lat": 44.976614, "long": -93.2670266}
     }
+
+    #### test printing api key from config.py file when the page is loaded
+    # print(api_key)
+
+    print(f'the api key from the config file is{api_key}')
+
+
+
     return render_template("index.html", locations=locations)
 
 
