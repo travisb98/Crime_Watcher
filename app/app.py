@@ -17,7 +17,9 @@ import crime_api
 import danger_score_algorithm
 
 #import the the api key from the config.py file
-from config import api_key
+# from config import api_key
+
+import config
 
 
 #create app
@@ -31,12 +33,12 @@ app = Flask(__name__)
 
 
 
+# app.config['api_key']=config.api_key
 
 
 
 
-
-
+# api_key = json.dumps(config.api_key)
 
 
 
@@ -70,11 +72,17 @@ def home():
     #### test printing api key from config.py file when the page is loaded
     # print(api_key)
 
-    print(f'the api key from the config file is{api_key}')
+    print(f'the api key from the config file is{config.api_key}')
 
 
+    # ## convert api to json format
+    # api_key = json.dumps(config.api_key)
+    # print(f'the json api key is {api_key}')
 
-    return render_template("index.html", locations=locations)
+    api_key = config.api_key
+
+
+    return render_template("index.html", locations=locations,api_key=api_key)
 
 
 @app.route("/load", methods =['POST','GET'])

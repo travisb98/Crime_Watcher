@@ -1,10 +1,7 @@
 
 
-
-
-
 ///// add map to sit with minneapolis center coordinates
-var myMap = addMap(44.9778, -93.2650);
+var myMap = addMap(44.9778, -93.2650,api_key);
 
 
 function processUserData(data, myMap) {

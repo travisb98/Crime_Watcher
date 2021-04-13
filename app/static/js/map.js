@@ -1,9 +1,5 @@
 
-
-
-
-
-
+// console.log(api_key);
 
 ////// pass a lowercase string color(ie 'red') and it should return that color, I only tried it for red and green
 ///// maybe we could use a color scale to indicate the intensity of the crimes.........??????
@@ -21,11 +17,13 @@ function colorIcon(color){
 };
 
 //////// adds the map to the  
-function addMap(lat,lon){
+function addMap(lat,lon,api_key){
   var myMap = L.map("map", {
     center: [lat,lon],
     zoom: 12
   });
+
+  // L.titleLayer.accessToken ='{{api_key}}';
   // Add background layer 
   ////// i wonder if we could make 
   L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -34,7 +32,7 @@ function addMap(lat,lon){
     maxZoom:18,
     zoomOffset: -1,
     id: "mapbox/dark-v9",
-    accessToken: '{{api_key}}'
+    accessToken: api_key
   }).addTo(myMap);
 
   console.log('Title layer')
