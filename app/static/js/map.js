@@ -47,3 +47,18 @@ function addMarker(myMap,lat,lon,color,text){
 
 };
 
+
+// ///// maybe i need to pass markers to this layer as well?
+// function deleteMarkers(myMap){
+
+//   if(myMap.hasLayer(marker)){
+//     myMap.removeLayer(marker)
+
+
+//   };
+
+
+  
+
+
+// };

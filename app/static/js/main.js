@@ -13,8 +13,13 @@ function processUserData(data, myMap) {
     //// zoom in to user's location
     myMap.setView([parseFloat(userLat), parseFloat(userLong)], 14);
 
+    
+
+    // get the selected location so we can add it to the marker
+    var markerText = $('#SelectedLocation option:selected').text();
+
     ///// add marker for user data
-    addMarker(myMap, userLat, userLong, 'green', 'Your Location');
+    addMarker(myMap, userLat, userLong, 'green', markerText);
     ////// post their danger score 
     $('#gaugeLabel').html(`Your danger score is ${dangerScore}`);
     ////// add label to map
@@ -103,6 +108,8 @@ function postToFlask(data) {
     }).done(function (data) {
         console.log('response data received from server:');
         console.log(data);
+
+        // deleteMarkers(myMap);
         //  process the crime data
         processCrimeData(data, myMap);
         // process the user's data
