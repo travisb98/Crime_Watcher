@@ -100,33 +100,34 @@
     crossorigin=""></script>
 
 
+
+
+
+
+  <!-- JS map -->
+  <script type="text/javascript" src="./static/js/map.js"></script>
+
+
   <!--  i struggled to render the jinja in a javascript file so I'm doing it here -->
   <script type='text/javascript'>
-
-
       // //  function used to unpack api key from jinja
       function Unpacker(jinja_data){
         console.log(`the variable in the unpacker function is: ${jinja_data}`);
 
         return jinja_data
-
       };
   
 
-    
-    const api_key=Unpacker('{{api_key | safe}}');
+    // const api_key=Unpacker('{{api_key | safe}}');
 
+    var myMap = addMap(44.9778, -93.2650,'{{api_key | safe}}');
 
-
-
-    
-  
   </script>  
 
   <!-- API key -->
   <!-- <script type="text/javascript" src="./static/js/config.js"></script> -->
-  <!-- JS map -->
-  <script type="text/javascript" src="./static/js/map.js"></script>
+
+
   <!-- JS gauge -->
   <script type="text/javascript" src="./static/js/gauge.js"></script>
 
